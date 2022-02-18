@@ -11,11 +11,11 @@ In other words: Attribution is required. Non-commercial use only.
 
 ### Project Goals
 
-    Our goal is to make a tennis game predictor that will take in two fighters and return the predicted winner. 
+    Our goal is to make a tennis match predictor that will take in two players and return the predicted winner. 
 
 ### Project Description 
 
- Throughout the history of tennis, there have been matches and players who have captivated fans.  Using data from the last 20 years and modern machine learning algorithms, our team aims to predict the outcome of games based on the players’ statistics and data of their professional matches.
+ Throughout the history of tennis, there have been matches and players who have captivated fans.  Using data from the last 20 years and modern machine learning algorithms, our team aims to predict the outcome of matches based on the players’ statistics and data of their professional matches.
 
 ### Initial Questions
 
