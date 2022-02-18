@@ -13,11 +13,15 @@
 
 ### Initial Questions
 
-    1. Does player 1 break points saved impact winning? 
+    I. Does a difference in career average break points saved impact victory?
 
-    2. Does player 1 break points won impact winning?
+    II. Does a difference in career average break points won impact victory?
 
-    3. Does player 1 percent of first serve points won impact winning?
+    III. Does a difference in career percent-of-break-points-won impact victory?
+
+    IV. Does a difference in average forehand winners impact victory?
+
+    V. Does a difference in average backhand winners impact victory?
 
 ### Data Dictionary
     A list of the variables in the dataframe and their meaning. 
