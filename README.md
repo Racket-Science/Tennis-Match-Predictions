@@ -1,9 +1,3 @@
-# License
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">Tennis databases, files, and algorithms</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.tennisabstract.com/" property="cc:attributionName" rel="cc:attributionURL">Jeff Sackmann / Tennis Abstract</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/JeffSackmann" rel="dct:source">https://github.com/JeffSackmann</a>.
-
-In other words: Attribution is required. Non-commercial use only.
-
 
 # Tennis Match Prediction
 
@@ -19,11 +13,15 @@ In other words: Attribution is required. Non-commercial use only.
 
 ### Initial Questions
 
-    1. Does player 1 break points saved impact winning? 
+    I. Does a difference in career average break points saved impact victory?
 
-    2. Does player 1 break points won impact winning?
+    II. Does a difference in career average break points won impact victory?
 
-    3. Does player 1 percent of first serve points won impact winning?
+    III. Does a difference in career percent-of-break-points-won impact victory?
+
+    IV. Does a difference in average forehand winners impact victory?
+
+    V. Does a difference in average backhand winners impact victory?
 
 ### Data Dictionary
     A list of the variables in the dataframe and their meaning. 
@@ -48,8 +46,11 @@ In other words: Attribution is required. Non-commercial use only.
 
 ### The Plan 
         - Planning
+            - Create a Trello board
+            - Creare chats on slack and discord for team engagement
+            - Gain domain knowledge
         - Wrangle (Acquire and Prepare)
-            -create wrangle.py with functions for aquiring and prepping the data
+            - Create wrangle.py with functions for aquiring and prepping the data
         - Explore
             - ask initial questions of the data
             - answer questions with visuals and statistics 
@@ -76,3 +77,13 @@ In other words: Attribution is required. Non-commercial use only.
 
 
 ## With more time...
+
+# License Information
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Dataset" property="dct:title" rel="dct:type">Tennis databases, files, and algorithms</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.tennisabstract.com/" property="cc:attributionName" rel="cc:attributionURL">Jeff Sackmann / Tennis Abstract</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/JeffSackmann" rel="dct:source">https://github.com/JeffSackmann</a>.
+
+In other words: Attribution is required. Non-commercial use only.
+
+[1] http://www.tennisabstract.com/charting/meta.html
+
+[2] http://www.tennisabstract.com/charting/meta.html#contributors
