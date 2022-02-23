@@ -15,6 +15,15 @@ def prepare_atp():
     df.index = pd.to_datetime(df.index, format = '%Y%m%d')
     df = df.sort_index(ascending = True)
 
+    # create target variable 
+    df['player_1_wins'] = np.where(df['winner'] == df['player_1_name'], True, False)
+
+    # create dummy columns for surface, level, hand, and round 
+    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na=False, drop_first=[False])
+    # concat dummy columns to df
+    df = pd.concat([df, dummy_df], axis=1)
+    
+
     # drop all walkovers (no useful stats) and best of 1 matches (extremely rare format)
     df = df.drop(df[df.score == 'W/O'].index)
     df = df.drop(df[df.best_of == 1].index)
