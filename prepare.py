@@ -18,5 +18,5 @@ def prepare_atp():
     df = df.drop(df[df.score == 'W/O'].index)
     df = df.drop(df[df.best_of == 1].index)
 
-return df
+    return df
 
