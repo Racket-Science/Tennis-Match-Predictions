@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
 
 
 def prepare_atp():
@@ -18,5 +19,15 @@ def prepare_atp():
     df = df.drop(df[df.score == 'W/O'].index)
     df = df.drop(df[df.best_of == 1].index)
 
-return df
+    df_clean = df = df.dropna(subset=['player_1_aces'])
+    
+    return df
 
+def split_data(df):
+    '''
+    Takes in a dataframe and returns train, validate, and test subset dataframes. 
+    '''
+    train, test = train_test_split(df, test_size = .2, random_state = 123)
+    train, validate = train_test_split(train, test_size = .3, random_state = 123)
+    
+    return train, validate, test
