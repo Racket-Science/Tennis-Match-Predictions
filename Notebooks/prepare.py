@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
 
 
 def prepare_atp():
@@ -38,7 +39,6 @@ def prepare_atp():
     return df
 
 def split_data(df):
-    from sklearn.model_selection import train_test_split
     '''
     Takes in a dataframe and returns train, validate, and test subset dataframes. 
     '''
