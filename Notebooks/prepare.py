@@ -14,26 +14,53 @@ def prepare_atp():
     df.index = pd.to_datetime(df.index, format = '%Y%m%d')
     df = df.sort_index(ascending = True)
 
+    # set dataframe to years 1999-2019 (21 years of recent data minus corona years)
+    df = df['1999-01-01':'2020-01-01']
+
     # create target variable 
     df['player_1_wins'] = np.where(df['winner'] == df['player_1_name'], True, False)
-
-    #  create dummy columns for surface, level, hand, and round 
-    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na=False, drop_first=[False])
-    # oncat dummy columns to df
-    df = pd.concat([df, dummy_df], axis=1)
     
-
     # drop all walkovers (no useful stats) and best of 1 matches (extremely rare format)
     df = df.drop(df[df.score == 'W/O'].index)
     df = df.drop(df[df.best_of == 1].index)
 
-    # set dataframe to years 1999-2019 (21 years of recent data minus corona years)
-    df = df['1999-01-01':'2020-01-01']
     # drop janky records
     df = df[df['player_1_first_serve_%'].notnull()]
     df = df[df['player_2_first_serve_%'].notnull()]
 
+    # gather all players in two sets
+    players = set(list(df.player_1.unique()))
+    players2 = set(list(df.player_2.unique()))
+
+    # combine, drop duplicates, convert set to list type and sort for fun 
+    players = players.union(players2)
+    players = list(players)
+    players.sort()
+
+    # set an empty list to fill
+    less_than_50 = []
+
+    # use a for-loop to run through the list of players
+    for player in players:
+        # set up if-conditional to see if the length of records where a player shows up in the dataframe is less than 50
+        if len(df[(df.player_1 == player) | (df.player_2 == player)]) < 50:
+            # if there are less than 50 records, add the player's name to the list
+            less_than_50.append(player)
+    # sort list
+    less_than_50.sort()
+
+    # run through loop of list of players with less than 50 matches
+    for player in less_than_50:
+        # set dataframe to records where these players are not present
+        df = df[df.player_1 != player]
+        df = df[df.player_2 != player]
+
     df_clean = df = df.dropna(subset=['player_1_aces'])
+
+    # create dummy columns for surface, level, hand, and round 
+    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na=False, drop_first=[False])
+    # concat dummy columns to df
+    df = pd.concat([df, dummy_df], axis=1)
     
     return df
 
