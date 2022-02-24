@@ -58,7 +58,7 @@ def prepare_atp():
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
     # create dummy columns for surface, level, hand, and round 
-    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na=False, drop_first=[False])
+    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na = False, drop_first = False)
     # concat dummy columns to df
     df = pd.concat([df, dummy_df], axis=1)
     
