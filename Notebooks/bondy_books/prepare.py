@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+## Federer vs the World
 
 def prepare_atp():
 
@@ -55,12 +56,56 @@ def prepare_atp():
         df = df[df.player_1 != player]
         df = df[df.player_2 != player]
 
+    # # drop player entry columns, verify
+    # df = df.drop(columns = ['player_1_entry', 'player_2_entry'])
+# 
+    # # write df to .csv 
+    # df.to_csv('temp_csv_unortho_fix.csv')
+# 
+    # # read .csv to grab index as string (for concatenation manipulation)
+    # df = pd.read_csv('temp_csv_unortho_fix.csv', index_col = 0)
+# 
+    # # generate original index for later
+    # df['tourney_date'] = df.index
+# 
+    # # form unique index values for all rows by concatenating date + tournament + match
+    # df.index = df.index + '/ ' + df.tourney_id + '/ ' + df.match_num.astype(str)
+# 
+    # # assign variable to index
+    # jd_p1_index = list(df[df.player_1 == 'Jared Donaldson'].index)
+    # # review index where Jared is player 2, assign to variable
+    # jd_p2_index = df[df.player_2 == 'Jared Donaldson'].index
+    # # fill all his heights with 188 cm
+    # df.loc[jd_p1_index, 'player_1_ht'] = 188
+    # # fill all his heights with 188
+    # df.loc[jd_p2_index, 'player_2_ht'] = 188
+# 
+    # # assign variable to index where AG is ready player1
+    # ag_p1_index = df[df.player_1 == 'Alejandro Gonzalez'].index
+    # # fill his heights 191
+    # df.loc[ag_p1_index, 'player_1_ht'] = 191
+    # # assign variable to indexes where AG is player2
+    # ag_p2_index = df[df.player_2 == 'Alejandro Gonzalez'].index
+    # # fill his heights 191
+    # df.loc[ag_p2_index, 'player_2_ht'] = 191
+# 
+    # # assign variables to indexes where Thomas is player 1 or player 2
+    # tf_p1_index = df[df.player_1 == 'Thomas Fabbiano'].index
+    # tf_p2_index = df[df.player_2 == 'Thomas Fabbiano'].index
+    # # fill his heights with 173 cm
+    # df.loc[tf_p1_index, 'player_1_ht'] = 173
+    # df.loc[tf_p2_index, 'player_2_ht'] = 173
+# 
+    # * Drop ranking for modeling (there is no official lowest rank) (so don't include it in the training model set)
+    # * fill null values for ranking points with 0 points (these players are unranked due to huge lapses in activity on the tour)
+    # * settle for using average tournament match time to fill in stats where match length is missing, we just don't want to lose the rest of the data in those records
+
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
     # create dummy columns for surface, level, hand, and round 
     dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na = False, drop_first = False)
     # concat dummy columns to df
-    df = pd.concat([df, dummy_df], axis=1)
+    df = pd.concat([df, dummy_df], axis = 1)
     
     return df
 
