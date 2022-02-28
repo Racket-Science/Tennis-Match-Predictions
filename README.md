@@ -33,7 +33,37 @@
     A list of the variables in the dataframe and their meaning. 
 | Variable       | Datatype| Description               |
 | -------------- | --------- |------------------------ |
-| draw_size    |           |                         | 
+| PlayerID    |           |                         | 
+|Player Name|           |                         | 
+|Age          |           |                         | 
+|Height|           |                         | 
+|MaxRank|           |                         | 
+|Hand|           |                         | 
+|Country|           |                         | 
+|win_count|           |                         |
+|lose_count|           |                         | 
+|match_count|           |                         | 
+|win%|           |                         | 
+|aces_in_match_lost|           |                         | 
+|aces_in_match_won|           |                         | 
+|ace_count|           |                         | 
+|aces_per_game|           |                         | 
+|first_serve_percentage_match_lost|           |                         | 
+|first_serve_percentage_match_won|           |                         | 
+|first_serve_won_percentage_match_lost|           |                         | 
+|first_serve_won_percentage_match_won|           |                         | 
+|breakpoints_won_match_lost|           |                         | 
+|breakpoints_won_match_won|           |                         | 
+|breakpoint_count|           |                         | 
+|breakpoints_per_game|           |                         | 
+|win_count_30|           |                         | 
+|loss_count_30|           |                         | 
+|win_count_100|           |                         | 
+|loss_count_100|           |                         | 
+|total_top30_matches|           |                         | 
+|total_top100_matches|           |                         | 
+|top_30_win%|           |                         | 
+|top_100_win|           |                         | 
 |                |           |                         | 
 |                |           |                         | 
 |                |           |                         | 
@@ -41,6 +71,12 @@
 |                |           |                         | 
 |                |           |                         | 
 |                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+
   
 
 ### Steps to Reproduce 
