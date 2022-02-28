@@ -1,11 +1,21 @@
-
 # Tennis Match Prediction
+
+### Team Members: 
+- Chole Whitaker 
+- Alejandro Velasquez 
+- Daniel Northcutt 
+- Mason Sharbondy
 
 ##  About the Project
 
 ### Project Goals
 
-    Our goal is to make a tennis match predictor that will take in two players and return the predicted winner. 
+Analizy data from 1999 to 2019  to:
+
+1. Create machine-learning algorithm to predict the outcome of a tennis match between two players
+ 
+2. Learn about what makes Roger Federer one of the top players for the last 20 years by looking at his top rivalries and their match data
+
 
 ### Project Description 
 
@@ -19,11 +29,9 @@
 
     III. Does a difference in career percent-of-break-points-won impact victory?
 
-    A. What are the drivers that determine a change in the dynamic between two players? Is there anything in our data set to suggest a change in dynamic?
+    IV. What are the drivers that determine a change in the dynamic between two players? Is there anything in our data set to suggest a change in dynamic?
 
-    B. How do key rivalries play out in best of 3 matches vs best of 5? Do rivalries take a different story at Grand Slam events?
-
-    C. How do key rivalries play out on clay? On grass? On hard court?
+    V. How do key rivalries play out on clay? On grass? On hard court?
 
 ### Data Dictionary
     A list of the variables in the dataframe and their meaning. 
