@@ -117,6 +117,9 @@ def prepare_atp():
     df = df.set_index('tourney_date')
     df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
 
+    # drop superfluous
+    df = df.drop(columns = ['player_1_name', 'player_2_name'])
+
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
     # create dummy columns for surface, level, hand, and round 
