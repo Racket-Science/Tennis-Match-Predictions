@@ -31,52 +31,58 @@
 
 ### Data Dictionary
     A list of the variables in the dataframe and their meaning. 
+
+| -------------- | --------- |------------------------ |
 | Variable       | Datatype| Description               |
 | -------------- | --------- |------------------------ |
-| PlayerID    |           |                         | 
-|Player Name|           |                         | 
-|Age          |           |                         | 
-|Height|           |                         | 
-|MaxRank|           |                         | 
-|Hand|           |                         | 
-|Country|           |                         | 
-|win_count|           |                         |
-|lose_count|           |                         | 
-|match_count|           |                         | 
-|win%|           |                         | 
-|aces_in_match_lost|           |                         | 
-|aces_in_match_won|           |                         | 
-|ace_count|           |                         | 
-|aces_per_game|           |                         | 
-|first_serve_percentage_match_lost|           |                         | 
-|first_serve_percentage_match_won|           |                         | 
-|first_serve_won_percentage_match_lost|           |                         | 
-|first_serve_won_percentage_match_won|           |                         | 
-|breakpoints_won_match_lost|           |                         | 
-|breakpoints_won_match_won|           |                         | 
-|breakpoint_count|           |                         | 
-|breakpoints_per_game|           |                         | 
-|win_count_30|           |                         | 
-|loss_count_30|           |                         | 
-|win_count_100|           |                         | 
-|loss_count_100|           |                         | 
-|total_top30_matches|           |                         | 
-|total_top100_matches|           |                         | 
-|top_30_win%|           |                         | 
-|top_100_win|           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-|                |           |                         | 
-
+|player_1_wins   |           | Target variable. Indicates if person  classified as player one has won the game|
+| PlayerID    |int64|Unique player identification| 
+|Player Name|object|Represents the players name| 
+|Age|float64|                         | 
+|Height|float64|Represents the height of the player| 
+|MaxRank|float64|Maximum rank achieved by player in the length of our database| 
+|Hand|object|Represents dominant hand of player R = right, L = left| 
+|Country|object|Country of descendants of the player| 
+|win_count|float64|Number of wins for the for the period of time of our database|
+|lose_count|float64|Number of losses for the period of time of our database| 
+|match_count|float64|Total matches just played for the period of time of our database| 
+|win%|float64|Total wins divided by the sum of losses and wins| 
+|aces_in_match_lost|float64|Times rival answers first serve| 
+|aces_in_match_won|float64|Times player serving the ball gets a point without the contest of rival| 
+|ace_count|float64|Total count of aces for the period of time of our database| 
+|aces_per_game|float64|Count of aces in a game| 
+|first_serve_percentage_match_lost|float64|                         | 
+|first_serve_percentage_match_won|float64|                         | 
+|first_serve_won_percentage_match_lost|float64|                         | 
+|first_serve_won_percentage_match_won|float64|                         | 
+|breakpoints_won_match_lost|float64|                         | 
+|breakpoints_won_match_won|float64|                         | 
+|breakpoint_count|float64|Total count of all breakpoints for the period of time of our database| 
+|breakpoints_per_game|float64|Total count of brakpoints in a game| 
+|win_count_30|float64|| 
+|loss_count_30|float64|                         | 
+|win_count_100|float64|                         | 
+|loss_count_100|float64|                         | 
+|total_top30_matches|float64|                         | 
+|total_top100_matches|float64|                         | 
+|top_30_win%|float64|                         | 
+|top_100_win%|float64|                         | 
+|tourney_level|uint8|                         | 
+|best_of|int64|                         | 
+|player_1|string|Name of player one| 
+|player_2|sring|Name of player two| 
+|player_ioc|object|                         | 
+|player_rank|float64|Rank of player at the time of match| 
+|player_1_wins|bool|                         | 
+|round|object|                         | 
+|surface|object|Represents the type of material the floor of the court is made of| 
+|ht_diff|float64|Hight difference between players| 
+|age_diff|float64|Age difference at the time of match| 
+|rank_diff|float64|Rank difference at the time of match| 
+|rank_points_diff|float64|Rank points difference at the time of match| 
+|winner_rank|float64|Rank of winner| 
+|loser_rank|float64|Rank of looser
+|--------------|---------|------|
   
 
 ### Steps to Reproduce 
