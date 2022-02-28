@@ -10,7 +10,12 @@
 
 ### Project Goals
 
-    Our goal is to make a tennis match predictor that will take in two players and return the predicted winner. 
+Analizy data from 1999 to 2019  to:
+
+1. Create machine-learning algorithm to predict the outcome of a tennis match between two players
+ 
+2. Learn about what makes Roger Federer one of the top players for the last 20 years by looking at his top rivalries and their match data
+
 
 ### Project Description 
 
