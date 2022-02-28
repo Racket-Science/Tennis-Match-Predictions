@@ -19,10 +19,6 @@
 
     III. Does a difference in career percent-of-break-points-won impact victory?
 
-    IV. Does a difference in average forehand winners impact victory?
-
-    V. Does a difference in average backhand winners impact victory?
-
     A. What are the drivers that determine a change in the dynamic between two players? Is there anything in our data set to suggest a change in dynamic?
 
     B. How do key rivalries play out in best of 3 matches vs best of 5? Do rivalries take a different story at Grand Slam events?
