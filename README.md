@@ -31,17 +31,16 @@
 
 ### Data Dictionary
     A list of the variables in the dataframe and their meaning. 
-
-    | Variable       | Datatype| Description               |
-    | -------------- | --------- |------------------------ |
-    | draw_size    |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
-    |                |           |                         | 
+| Variable       | Datatype| Description               |
+| -------------- | --------- |------------------------ |
+| draw_size    |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
+|                |           |                         | 
   
 
 ### Steps to Reproduce 
