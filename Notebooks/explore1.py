@@ -401,3 +401,118 @@ def get_pie_tourney_level(fed_v_nad1):
     # display chart
     plt.tight_layout()
     plt.show()
+
+
+####################################
+# NADAL VS Djokovic
+####################################
+#Player 1 is always alphabetically first - Novak
+Djokovic_Federer = df[df.player_1 == 'Novak Djokovic']
+#Player 2 will be Roger
+Djokovic_Federer = Djokovic_Federer[Djokovic_Federer.player_2 == 'Roger Federer']
+Djokovic_Federer['year'] = (Djokovic_Federer['tourney_id'].str[0:4]).astype(int)
+
+
+##### Bar Graph By Year
+def rod_djo_bar():
+    years = [i for i in range(1999, 2019)]
+    fedwins = [0 for i in range(1999, 2019)]
+    djowins = [0 for i in range(1999, 2019)]
+
+    for index, row in Djokovic_Federer.iterrows():
+        if row['winner'] == "Novak Djokovic":
+            djowins[row['year'] - 2004] += 1
+        elif row['winner'] == "Roger Federer":
+            fedwins[row['year'] - 2004] += 1
+    plt.figure(figsize=(12,8))
+
+    #barwith and position
+    barWidth = 0.4
+    r1 = np.arange(len(fedwins))
+    r2 = [x + barWidth for x in r1]
+
+    # Make the plot
+    plt.bar(r1, fedwins, color='#3C638E', width=barWidth, edgecolor='white', label='Federer wins')
+    plt.bar(r2, djowins, color='#dfff4f', width=barWidth, edgecolor='white', label='Djokovic wins')
+
+    # Add xticks on the middle of the group bars
+    plt.title('Plotting Roger Federer vs Novak Djokovic over the years', fontweight='bold')
+    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2019)])
+    plt.xlabel("Year")
+    plt.ylabel("# of Wins")
+
+    # Create legend & Show graphic
+    plt.legend()
+
+##### Pie Graph Distribution
+def get_pie_wins(Djokovic_Federer):
+    '''get pie chart for percent of wins'''
+
+    # set values and labels for chart
+    values = [len(Djokovic_Federer.player_1_wins[Djokovic_Federer.player_1_wins == True]), len(Djokovic_Federer.player_1_wins[Djokovic_Federer.player_1_wins == False])] 
+    labels = ['Djokovic Wins','Federer Wins', ] 
+
+    # generate and show chart
+    plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
+    plt.title('Games Ending in Federer winning Represents 1/2 of the time in the last 20 years')
+    plt.show()
+
+
+
+###### Building out for the next (Chloe's code)
+fed_v_djo1 = df[df.player_1.isin(['Novak Djokovic']) & df.player_2.isin(['Roger Federer'])] 
+Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+Andy_djoray1 = df[df.player_1.isin(['Novak Djokovic'])]
+Andy_djoray2 = df[df.player_2.isin(['Novak Djokovic'])] 
+
+#### PIE UPSETS ###
+def get_pies_upsets(fed_v_djo1):
+    "create pie charts showing upset percentage for having and not having the first move"
+
+    # create axis object
+    fig, (ax1,ax2) = plt.subplots(1,2)
+    
+    # create pie chart and assign to axis object
+    values = [len(fed_v_djo1.no_upset[(fed_v_djo1.player_1_wins == True) & (fed_v_djo1.no_upset == True)]),
+            len(fed_v_djo1.no_upset[(fed_v_djo1.player_1_wins == True) & (fed_v_djo1.no_upset == False)])]
+    labels = ['Djokovic Wins', 'Federer Wins']
+
+    ax1.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
+    ax1.title.set_text('High Ranked Player Wins')
+
+    # create pie chart and and assign to axis object
+    values = [len(fed_v_djo1.no_upset[(fed_v_djo1.player_1_wins == False) & (fed_v_djo1.no_upset == True)]),
+            len(fed_v_djo1.no_upset[(fed_v_djo1.player_1_wins == False) & (fed_v_djo1.no_upset == False)])]
+    labels = ['Djokovic Wins', 'Federer Wins'] 
+
+    ax2.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
+    ax2.title.set_text('Lower Ranked Player Wins')
+
+    # display charts
+    plt.tight_layout()
+    plt.show()
+
+
+##### PIE TOURNEY LEVEL #####
+def get_pie_tourney_level(fed_v_djo1):
+    '''get pie chart of player win percentage for each tourney level'''
+
+    # activate subplots objects
+    fig, axs = plt.subplots(2, 2, figsize=(10,8))
+
+    # list of charts to be generated
+    levels = ['A', 'F', 'G', 'M']
+
+    # generate graphs and assign them to subplots
+    for level, ax in zip(levels, axs.ravel()):
+        
+        values = [len(fed_v_djo1.player_1_wins[(fed_v_djo1.player_1_wins == True) & (fed_v_djo1.tourney_level == level)]), len(fed_v_djo1.player_1_wins[(fed_v_djo1.player_1_wins == False) & (fed_v_djo1.tourney_level == level)])] 
+        labels = ['Djokovic','Federer Wins']
+        
+        ax.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
+        ax.set_title(f'Win Percentage for tourney {level}')
+    
+    # display chart
+    plt.tight_layout()
+    plt.show()
