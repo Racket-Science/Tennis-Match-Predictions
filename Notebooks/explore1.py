@@ -67,8 +67,14 @@ Murray_Federer['year'] = (Murray_Federer['tourney_id'].str[0:4]).astype(int)
 
 
 ##### pie wins
-def get_pie_wins(Murray_Federer):
+def get_pie_wins_mur_fed():
     '''get pie chart for percent of wins'''
+
+    Murray_Federer = df[df.player_1 == 'Andy Murray']
+    #Player 2 will be Roger
+    Murray_Federer = Murray_Federer[Murray_Federer.player_2 == 'Roger Federer']
+    #creating year column
+    Murray_Federer['year'] = (Murray_Federer['tourney_id'].str[0:4]).astype(int)
 
     # set values and labels for chart
     values = [len(Murray_Federer.player_1_wins[Murray_Federer.player_1_wins == True]), len(Murray_Federer.player_1_wins[Murray_Federer.player_1_wins == False])] 
@@ -112,7 +118,7 @@ def rod_mur_bar():
     plt.legend()
 
 ###### Building out for the next (Chloe's code)
-fed_v_rod1 = df[df.player_1.isin(['Andy Murray']) & df.player_2.isin(['Roger Federer'])] 
+fed_v_mur1 = df[df.player_1.isin(['Andy Murray']) & df.player_2.isin(['Roger Federer'])] 
 Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
 Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
 Andy_rodray1 = df[df.player_1.isin(['Andy Murray'])]
@@ -120,9 +126,14 @@ Andy_rodray2 = df[df.player_2.isin(['Andy Murray'])]
 
 
 ##### pie upsets
-def get_pies_upsets(fed_v_mur1):
+def get_pies_upsets_fed_mur():
     "create pie charts showing upset percentage for having and not having the first move"
 
+    fed_v_mur1 = df[df.player_1.isin(['Andy Murray']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_rodray1 = df[df.player_1.isin(['Andy Murray'])]
+    Andy_rodray2 = df[df.player_2.isin(['Andy Murray'])] 
     # create axis object
     fig, (ax1,ax2) = plt.subplots(1,2)
     
@@ -147,9 +158,14 @@ def get_pies_upsets(fed_v_mur1):
     plt.show()
 
 ######### pie tourney 
-def get_pie_tourney_level(fed_v_mur1):
+def get_pie_tourney_level_fed_mur():
     '''get pie chart of player win percentage for each tourney level'''
 
+    fed_v_mur1 = df[df.player_1.isin(['Andy Murray']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_rodray1 = df[df.player_1.isin(['Andy Murray'])]
+    Andy_rodray2 = df[df.player_2.isin(['Andy Murray'])] 
     # activate subplots objects
     fig, axs = plt.subplots(2, 2, figsize=(10,8))
 
@@ -185,6 +201,13 @@ Rodrick_Federer['year'] = (Rodrick_Federer['tourney_id'].str[0:4]).astype(int)
 #### bar graphs by year
 
 def rod_fed_bar():
+    
+    #Player 1 is always alphabetically first - Andy
+    Rodrick_Federer = df[df.player_1 == 'Andy Roddick']
+    #Player 2 will be Roger
+    Rodrick_Federer = Rodrick_Federer[Rodrick_Federer.player_2 == 'Roger Federer']
+    Rodrick_Federer['year'] = (Rodrick_Federer['tourney_id'].str[0:4]).astype(int)
+
     years = [i for i in range(1999, 2019)]
     fedwins = [0 for i in range(1999, 2019)]
     rodwins = [0 for i in range(1999, 2019)]
@@ -217,8 +240,13 @@ def rod_fed_bar():
 ####################################
 
     #### pie wins
-def get_pie_wins(Rodrick_Federer):
+def get_pie_wins_rod_fed():
     '''get pie chart for percent of wins'''
+    #Player 1 is always alphabetically first - Andy
+    Rodrick_Federer = df[df.player_1 == 'Andy Roddick']
+    #Player 2 will be Roger
+    Rodrick_Federer = Rodrick_Federer[Rodrick_Federer.player_2 == 'Roger Federer']
+    Rodrick_Federer['year'] = (Rodrick_Federer['tourney_id'].str[0:4]).astype(int)
 
     # set values and labels for chart
     values = [len(Rodrick_Federer.player_1_wins[Rodrick_Federer.player_1_wins == True]), len(Rodrick_Federer.player_1_wins[Rodrick_Federer.player_1_wins == False])] 
@@ -237,8 +265,14 @@ Andy_rodray1 = df[df.player_1.isin(['Andy Roddick'])]
 Andy_rodray2 = df[df.player_2.isin(['Andy Roddick'])] 
 
 
-def get_pies_upsets(fed_v_rod1):
+def get_pies_upsets_fed_rod():
     "create pie charts showing upset percentage for having and not having the first move"
+
+    fed_v_rod1 = df[df.player_1.isin(['Andy Roddick']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_rodray1 = df[df.player_1.isin(['Andy Roddick'])]
+    Andy_rodray2 = df[df.player_2.isin(['Andy Roddick'])] 
 
     # create axis object
     fig, (ax1,ax2) = plt.subplots(1,2)
@@ -264,8 +298,14 @@ def get_pies_upsets(fed_v_rod1):
     plt.show()
 
 
-def get_pie_tourney_level(fed_v_rod1):
+def get_pie_tourney_level_fed_rod():
     '''get pie chart of player win percentage for each tourney level'''
+
+    fed_v_rod1 = df[df.player_1.isin(['Andy Roddick']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_rodray1 = df[df.player_1.isin(['Andy Roddick'])]
+    Andy_rodray2 = df[df.player_2.isin(['Andy Roddick'])] 
 
     # activate subplots objects
     fig, axs = plt.subplots(2, 2, figsize=(10,8))
@@ -332,7 +372,7 @@ def rod_nad_bar():
 
 #### PIE CHARTS ### 
 
-def get_pie_wins(Nadal_Federer):
+def get_pie_wins_nad_fed():
     '''get pie chart for percent of wins'''
 
     # set values and labels for chart
@@ -353,7 +393,7 @@ Andy_rodray2 = df[df.player_2.isin(['Rafael Nadal'])]
 
 #### PIE UPSETS ###
 
-def get_pies_upsets(fed_v_nad1):
+def get_pies_upsets_fed_nad():
     "create pie charts showing upset percentage for having and not having the first move"
 
     # create axis object
@@ -380,7 +420,7 @@ def get_pies_upsets(fed_v_nad1):
     plt.show()
 
 ##### PIE TOURNEY LEVEL #####
-def get_pie_tourney_level(fed_v_nad1):
+def get_pie_tourney_level_fed_nad():
     '''get pie chart of player win percentage for each tourney level'''
 
     # activate subplots objects
@@ -414,7 +454,7 @@ Djokovic_Federer['year'] = (Djokovic_Federer['tourney_id'].str[0:4]).astype(int)
 
 
 ##### Bar Graph By Year
-def rod_djo_bar():
+def fed_djo_bar():
     years = [i for i in range(1999, 2019)]
     fedwins = [0 for i in range(1999, 2019)]
     djowins = [0 for i in range(1999, 2019)]
@@ -445,7 +485,7 @@ def rod_djo_bar():
     plt.legend()
 
 ##### Pie Graph Distribution
-def get_pie_wins(Djokovic_Federer):
+def get_pie_wins_djo_fed():
     '''get pie chart for percent of wins'''
 
     # set values and labels for chart
@@ -467,8 +507,13 @@ Andy_djoray1 = df[df.player_1.isin(['Novak Djokovic'])]
 Andy_djoray2 = df[df.player_2.isin(['Novak Djokovic'])] 
 
 #### PIE UPSETS ###
-def get_pies_upsets(fed_v_djo1):
+def get_pies_upsets_djo_fed():
     "create pie charts showing upset percentage for having and not having the first move"
+    fed_v_djo1 = df[df.player_1.isin(['Novak Djokovic']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_djoray1 = df[df.player_1.isin(['Novak Djokovic'])]
+    Andy_djoray2 = df[df.player_2.isin(['Novak Djokovic'])] 
 
     # create axis object
     fig, (ax1,ax2) = plt.subplots(1,2)
@@ -495,9 +540,15 @@ def get_pies_upsets(fed_v_djo1):
 
 
 ##### PIE TOURNEY LEVEL #####
-def get_pie_tourney_level(fed_v_djo1):
+def get_pie_tourney_level_fed_djo():
     '''get pie chart of player win percentage for each tourney level'''
 
+    fed_v_djo1 = df[df.player_1.isin(['Novak Djokovic']) & df.player_2.isin(['Roger Federer'])] 
+    Roger_Federer1 = df[df.player_1.isin(['Roger Federer'])] 
+    Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
+    Andy_djoray1 = df[df.player_1.isin(['Novak Djokovic'])]
+    Andy_djoray2 = df[df.player_2.isin(['Novak Djokovic'])] 
+    
     # activate subplots objects
     fig, axs = plt.subplots(2, 2, figsize=(10,8))
 
@@ -508,7 +559,7 @@ def get_pie_tourney_level(fed_v_djo1):
     for level, ax in zip(levels, axs.ravel()):
         
         values = [len(fed_v_djo1.player_1_wins[(fed_v_djo1.player_1_wins == True) & (fed_v_djo1.tourney_level == level)]), len(fed_v_djo1.player_1_wins[(fed_v_djo1.player_1_wins == False) & (fed_v_djo1.tourney_level == level)])] 
-        labels = ['Djokovic','Federer Wins']
+        labels = ['Djokovic Wins','Federer Wins']
         
         ax.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
         ax.set_title(f'Win Percentage for tourney {level}')
