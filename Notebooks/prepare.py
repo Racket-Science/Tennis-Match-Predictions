@@ -135,8 +135,14 @@ def clean_for_model(df):
        'tourney_level_A', 'tourney_level_D', 'tourney_level_F', 'tourney_level_G', 'tourney_level_M', 'surface_Carpet', 'surface_Clay',
        'surface_Grass', 'surface_Hard']].copy(0)
     # drop null rows in specific columns
+    df = df[df.player_1_hand.notnull()]
+    df = df[df.player_2_hand.notnull()]
     df = df[df.player_1_ht.notnull()]
     df = df[df.player_2_ht.notnull()]
+    df = df[df.player_1_rank.notnull()]
+    df = df[df.player_2_rank.notnull()]
+    df = df[df.player_1_rank_points.notnull()]
+    df = df[df.player_2_rank_points.notnull()]
     
     # winner and loser rank columns
     df['winner_rank'] = np.where(df['winner'] == df['player_1_name'], df['player_1_rank'], df['player_2_rank'])
