@@ -155,3 +155,25 @@ def clean_for_model(df):
     df['year'] = (df['tourney_id'].str[0:4]).astype(int)
     
     return df
+
+
+def train_validate_test_split(df):
+    '''
+    This function takes in a dataframe (df) and returns 3 dfs
+    (train, validate, and test) split 20%, 24%, 56% respectively. 
+    
+    Also takes in a random seed for replicating results.  
+    '''
+    
+    from sklearn.model_selection import train_test_split
+     
+    train_and_validate, test = train_test_split(
+        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
+    )
+    train, validate = train_test_split(
+        train_and_validate,
+        test_size=0.3,
+        random_state=123,
+        stratify=train_and_validate.player_1_wins,
+    )
+    return train, validate, test
