@@ -56,49 +56,66 @@ def prepare_atp():
         df = df[df.player_1 != player]
         df = df[df.player_2 != player]
 
-    # # drop player entry columns, verify
-    # df = df.drop(columns = ['player_1_entry', 'player_2_entry'])
-# 
-    # # write df to .csv 
-    # df.to_csv('temp_csv_unortho_fix.csv')
-# 
-    # # read .csv to grab index as string (for concatenation manipulation)
-    # df = pd.read_csv('temp_csv_unortho_fix.csv', index_col = 0)
-# 
-    # # generate original index for later
-    # df['tourney_date'] = df.index
-# 
-    # # form unique index values for all rows by concatenating date + tournament + match
-    # df.index = df.index + '/ ' + df.tourney_id + '/ ' + df.match_num.astype(str)
-# 
-    # # assign variable to index
-    # jd_p1_index = list(df[df.player_1 == 'Jared Donaldson'].index)
-    # # review index where Jared is player 2, assign to variable
-    # jd_p2_index = df[df.player_2 == 'Jared Donaldson'].index
-    # # fill all his heights with 188 cm
-    # df.loc[jd_p1_index, 'player_1_ht'] = 188
-    # # fill all his heights with 188
-    # df.loc[jd_p2_index, 'player_2_ht'] = 188
-# 
-    # # assign variable to index where AG is ready player1
-    # ag_p1_index = df[df.player_1 == 'Alejandro Gonzalez'].index
-    # # fill his heights 191
-    # df.loc[ag_p1_index, 'player_1_ht'] = 191
-    # # assign variable to indexes where AG is player2
-    # ag_p2_index = df[df.player_2 == 'Alejandro Gonzalez'].index
-    # # fill his heights 191
-    # df.loc[ag_p2_index, 'player_2_ht'] = 191
-# 
-    # # assign variables to indexes where Thomas is player 1 or player 2
-    # tf_p1_index = df[df.player_1 == 'Thomas Fabbiano'].index
-    # tf_p2_index = df[df.player_2 == 'Thomas Fabbiano'].index
-    # # fill his heights with 173 cm
-    # df.loc[tf_p1_index, 'player_1_ht'] = 173
-    # df.loc[tf_p2_index, 'player_2_ht'] = 173
-# 
-    # * Drop ranking for modeling (there is no official lowest rank) (so don't include it in the training model set)
-    # * fill null values for ranking points with 0 points (these players are unranked due to huge lapses in activity on the tour)
-    # * settle for using average tournament match time to fill in stats where match length is missing, we just don't want to lose the rest of the data in those records
+    # drop player entry columns, verify
+    df = df.drop(columns = ['player_1_entry', 'player_2_entry'])
+
+    # write df to .csv 
+    df.to_csv('temp_csv_unortho_fix.csv')
+
+    # read .csv to grab index as string (for concatenation manipulation)
+    df = pd.read_csv('temp_csv_unortho_fix.csv', index_col = 0)
+
+    # generate original index for later
+    df['tourney_date'] = df.index
+
+    # form unique index values for all rows by concatenating date + tournament + match
+    df.index = df.index + '/ ' + df.tourney_id + '/ ' + df.match_num.astype(str)
+
+    # assign variable to index
+    jd_p1_index = list(df[df.player_1 == 'Jared Donaldson'].index)
+    # review index where Jared is player 2, assign to variable
+    jd_p2_index = df[df.player_2 == 'Jared Donaldson'].index
+    # fill all his heights with 188 cm
+    df.loc[jd_p1_index, 'player_1_ht'] = 188
+    # fill all his heights with 188
+    df.loc[jd_p2_index, 'player_2_ht'] = 188
+
+    # assign variable to index where AG is ready player1
+    ag_p1_index = df[df.player_1 == 'Alejandro Gonzalez'].index
+    # fill his heights 191
+    df.loc[ag_p1_index, 'player_1_ht'] = 191
+    # assign variable to indexes where AG is player2
+    ag_p2_index = df[df.player_2 == 'Alejandro Gonzalez'].index
+    # fill his heights 191
+    df.loc[ag_p2_index, 'player_2_ht'] = 191
+
+    # assign variables to indexes where Thomas is player 1 or player 2
+    tf_p1_index = df[df.player_1 == 'Thomas Fabbiano'].index
+    tf_p2_index = df[df.player_2 == 'Thomas Fabbiano'].index
+    # fill his heights with 173 cm
+    df.loc[tf_p1_index, 'player_1_ht'] = 173
+    df.loc[tf_p2_index, 'player_2_ht'] = 173
+
+    # fill rank point nulls with 0
+    df.player_1_rank_points = df.player_1_rank_points.fillna(0)
+    df.player_2_rank_points = df.player_2_rank_points.fillna(0)
+
+    # assign variable to list of tourney ids that have missing minutes
+    missing_minutes = list(df[df.minutes.isnull()].tourney_id.unique())
+    # commence loop through list of tournaments with missing match lengths
+    for tourney in missing_minutes:
+        # assign mean match length for tournament to variable
+        mean_match_length = df[df.tourney_id == tourney].minutes.mean()
+        # locate index where there are mml for the tournament, fill values with average match length
+        df.loc[df[df.tourney_id == tourney].minutes.isnull().index, 'minutes'] = mean_match_length
+
+    # create columns (engineer categorical feature) to determine if players are seeded
+    df['player_2_seeded'] = df.player_2_seed.apply(lambda x: x > 0)
+    df['player_1_seeded'] = df.player_1_seed.apply(lambda x: x > 0)
+
+    # reset index to tourney date
+    df = df.set_index('tourney_date')
+    df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
 
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
@@ -109,14 +126,25 @@ def prepare_atp():
     
     return df
 
-def split_data(df):
-    from sklearn.model_selection import train_test_split
+def train_validate_test_split(df):
     '''
-    Takes in a dataframe and returns train, validate, and test subset dataframes. 
-    '''
-    train, test = train_test_split(df, test_size = .2, random_state = 123)
-    train, validate = train_test_split(train, test_size = .3, random_state = 123)
+    This function takes in a dataframe (df) and returns 3 dfs
+    (train, validate, and test) split 20%, 24%, 56% respectively. 
     
+    Also takes in a random seed for replicating results.  
+    '''
+    
+    from sklearn.model_selection import train_test_split
+     
+    train_and_validate, test = train_test_split(
+        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
+    )
+    train, validate = train_test_split(
+        train_and_validate,
+        test_size=0.3,
+        random_state=123,
+        stratify=train_and_validate.player_1_wins
+    )
     return train, validate, test
 
 def calculate_column_nulls(df):
