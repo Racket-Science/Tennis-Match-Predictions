@@ -82,7 +82,7 @@
 |rank_points_diff|float64|Rank points difference at the time of match| 
 |winner_rank|float64|Rank of winner| 
 |loser_rank|float64|Rank of looser
-|--------------|---------|------|
+
   
 
 ### Steps to Reproduce 
