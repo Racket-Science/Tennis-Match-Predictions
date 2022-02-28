@@ -34,7 +34,7 @@
 
     | Variable       | Datatype| Description               |
     | -------------- | --------- |------------------------ |
-    | 'draw_size'    |           |                         | 
+    | draw_size    |           |                         | 
     |                |           |                         | 
     |                |           |                         | 
     |                |           |                         | 
