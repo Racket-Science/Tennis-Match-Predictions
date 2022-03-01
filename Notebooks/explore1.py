@@ -82,7 +82,7 @@ def get_pie_wins_mur_fed():
 
     # generate and show chart
     plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
-    plt.title('Games Ending in Federer winning Represents 1/2 of the time in the last 20 years')
+    plt.title('Matches Ending in Federer winning Represents 1/2 of the time in the last 20 years')
     plt.show()
 
 
@@ -250,11 +250,11 @@ def get_pie_wins_rod_fed():
 
     # set values and labels for chart
     values = [len(Rodrick_Federer.player_1_wins[Rodrick_Federer.player_1_wins == True]), len(Rodrick_Federer.player_1_wins[Rodrick_Federer.player_1_wins == False])] 
-    labels = ['Rodrick Wins','Federer Wins', ] 
+    labels = ['Roddick Wins','Federer Wins', ] 
 
     # generate and show chart
     plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
-    plt.title('Games Ending in Federer winning Represents 1/2 of the time in the last 20 years')
+    plt.title('Matches Ending in Federer Winning Represents 4/5 of the time in the last 20 years')
     plt.show()
 
     ####################################
@@ -381,7 +381,7 @@ def get_pie_wins_nad_fed():
 
     # generate and show chart
     plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
-    plt.title('Games Ending in Federer winning Represents 1/2 of the time in the last 20 years')
+    plt.title('Matches Ending in Federer winning Represents 3/8 of the time in the last 20 years')
     plt.show()
 
 ###### Building out for the next (Chloe's code)
@@ -494,7 +494,7 @@ def get_pie_wins_djo_fed():
 
     # generate and show chart
     plt.pie(values, labels=labels, autopct='%.0f%%', colors=['#dfff4f', '#3C638E'])
-    plt.title('Games Ending in Federer winning Represents 1/2 of the time in the last 20 years')
+    plt.title('Matches Ending in Federer winning Represents 1/2 of the time in the last 20 years')
     plt.show()
 
 
