@@ -28,6 +28,7 @@ def prepare_atp():
     # drop janky records
     df = df[df['player_1_first_serve_%'].notnull()]
     df = df[df['player_2_first_serve_%'].notnull()]
+    df = df[df['player_2_first_serve_win_%'].notnull()]
 
     # gather all players in two sets
     players = set(list(df.player_1.unique()))
@@ -110,8 +111,22 @@ def prepare_atp():
         df.loc[df[df.tourney_id == tourney].minutes.isnull().index, 'minutes'] = mean_match_length
 
     # create columns (engineer categorical feature) to determine if players are seeded
-    df['player_2_seeded'] = df.player_2_seed.apply(lambda x: x > 0)
     df['player_1_seeded'] = df.player_1_seed.apply(lambda x: x > 0)
+    df['player_2_seeded'] = df.player_2_seed.apply(lambda x: x > 0)
+    
+    # assign variable to all of best of 3 matches 
+    best_of_3 = df[df.best_of == 3]
+    # generate index for nulls
+    mm_index = df[df.minutes.isnull()].index
+    # fill nulls with best of 3 average match length time for our data (these tournaments are all best of 3) (this is a 'quick fix')
+    df.loc[mm_index, 'minutes'] = best_of_3.minutes.mean()
+
+    # fill ranking null values with string 'Unranked'
+    df.player_1_rank = df.player_1_rank.fillna('Unranked')
+    df.player_2_rank = df.player_2_rank.fillna('Unranked')
+    # fill seed nulls with string 'Unseeded'
+    df.player_1_seed = df.player_1_seed.fillna('Unseeded')
+    df.player_2_seed = df.player_2_seed.fillna('Unseeded')
 
     # reset index to tourney date
     df = df.set_index('tourney_date')

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+## Federer vs the World
 
 def prepare_atp():
 
@@ -27,6 +28,7 @@ def prepare_atp():
     # drop janky records
     df = df[df['player_1_first_serve_%'].notnull()]
     df = df[df['player_2_first_serve_%'].notnull()]
+    df = df[df['player_2_first_serve_win_%'].notnull()]
 
     # gather all players in two sets
     players = set(list(df.player_1.unique()))
@@ -55,23 +57,112 @@ def prepare_atp():
         df = df[df.player_1 != player]
         df = df[df.player_2 != player]
 
+    # drop player entry columns, verify
+    df = df.drop(columns = ['player_1_entry', 'player_2_entry'])
+
+    # write df to .csv 
+    df.to_csv('temp_csv_unortho_fix.csv')
+
+    # read .csv to grab index as string (for concatenation manipulation)
+    df = pd.read_csv('temp_csv_unortho_fix.csv', index_col = 0)
+
+    # generate original index for later
+    df['tourney_date'] = df.index
+
+    # form unique index values for all rows by concatenating date + tournament + match
+    df.index = df.index + '/ ' + df.tourney_id + '/ ' + df.match_num.astype(str)
+
+    # assign variable to index
+    jd_p1_index = list(df[df.player_1 == 'Jared Donaldson'].index)
+    # review index where Jared is player 2, assign to variable
+    jd_p2_index = df[df.player_2 == 'Jared Donaldson'].index
+    # fill all his heights with 188 cm
+    df.loc[jd_p1_index, 'player_1_ht'] = 188
+    # fill all his heights with 188
+    df.loc[jd_p2_index, 'player_2_ht'] = 188
+
+    # assign variable to index where AG is ready player1
+    ag_p1_index = df[df.player_1 == 'Alejandro Gonzalez'].index
+    # fill his heights 191
+    df.loc[ag_p1_index, 'player_1_ht'] = 191
+    # assign variable to indexes where AG is player2
+    ag_p2_index = df[df.player_2 == 'Alejandro Gonzalez'].index
+    # fill his heights 191
+    df.loc[ag_p2_index, 'player_2_ht'] = 191
+
+    # assign variables to indexes where Thomas is player 1 or player 2
+    tf_p1_index = df[df.player_1 == 'Thomas Fabbiano'].index
+    tf_p2_index = df[df.player_2 == 'Thomas Fabbiano'].index
+    # fill his heights with 173 cm
+    df.loc[tf_p1_index, 'player_1_ht'] = 173
+    df.loc[tf_p2_index, 'player_2_ht'] = 173
+
+    # fill rank point nulls with 0
+    df.player_1_rank_points = df.player_1_rank_points.fillna(0)
+    df.player_2_rank_points = df.player_2_rank_points.fillna(0)
+
+    # assign variable to list of tourney ids that have missing minutes
+    missing_minutes = list(df[df.minutes.isnull()].tourney_id.unique())
+    # commence loop through list of tournaments with missing match lengths
+    for tourney in missing_minutes:
+        # assign mean match length for tournament to variable
+        mean_match_length = df[df.tourney_id == tourney].minutes.mean()
+        # locate index where there are mml for the tournament, fill values with average match length
+        df.loc[df[df.tourney_id == tourney].minutes.isnull().index, 'minutes'] = mean_match_length
+
+    # create columns (engineer categorical feature) to determine if players are seeded
+    df['player_1_seeded'] = df.player_1_seed.apply(lambda x: x > 0)
+    df['player_2_seeded'] = df.player_2_seed.apply(lambda x: x > 0)
+    
+    # assign variable to all of best of 3 matches 
+    best_of_3 = df[df.best_of == 3]
+    # generate index for nulls
+    mm_index = df[df.minutes.isnull()].index
+    # fill nulls with best of 3 average match length time for our data (these tournaments are all best of 3) (this is a 'quick fix')
+    df.loc[mm_index, 'minutes'] = best_of_3.minutes.mean()
+
+    # fill ranking null values with string 'Unranked'
+    df.player_1_rank = df.player_1_rank.fillna('Unranked')
+    df.player_2_rank = df.player_2_rank.fillna('Unranked')
+    # fill seed nulls with string 'Unseeded'
+    df.player_1_seed = df.player_1_seed.fillna('Unseeded')
+    df.player_2_seed = df.player_2_seed.fillna('Unseeded')
+
+    # reset index to tourney date
+    df = df.set_index('tourney_date')
+    df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
+
+    # drop superfluous
+    df = df.drop(columns = ['player_1_name', 'player_2_name'])
+
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
     # create dummy columns for surface, level, hand, and round 
-    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na=False, drop_first = False)
+    dummy_df = pd.get_dummies(df[['surface', 'tourney_level', 'player_1_hand', 'player_2_hand', 'round']], dummy_na = False, drop_first = False)
     # concat dummy columns to df
-    df = pd.concat([df, dummy_df], axis=1)
+    df = pd.concat([df, dummy_df], axis = 1)
     
     return df
 
-def split_data(df):
-    from sklearn.model_selection import train_test_split
+def train_validate_test_split(df):
     '''
-    Takes in a dataframe and returns train, validate, and test subset dataframes. 
-    '''
-    train, test = train_test_split(df, test_size = .2, random_state = 123)
-    train, validate = train_test_split(train, test_size = .3, random_state = 123)
+    This function takes in a dataframe (df) and returns 3 dfs
+    (train, validate, and test) split 20%, 24%, 56% respectively. 
     
+    Also takes in a random seed for replicating results.  
+    '''
+    
+    from sklearn.model_selection import train_test_split
+     
+    train_and_validate, test = train_test_split(
+        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
+    )
+    train, validate = train_test_split(
+        train_and_validate,
+        test_size=0.3,
+        random_state=123,
+        stratify=train_and_validate.player_1_wins
+    )
     return train, validate, test
 
 def calculate_column_nulls(df):
@@ -122,64 +213,3 @@ def calculate_row_nulls(df):
     row_nulls = row_nulls.sort_values('nulls', ascending = False)   # sort
 
     return row_nulls 
-
-
-def clean_for_model(df):    
-   
-    df = df[['tourney_id', 'draw_size', 'winner', 'surface',
-       'tourney_level', 'best_of', 'player_1', 'player_2', 'player_1_age',
-       'player_2_age', 'player_1_hand',
-       'player_2_hand', 'player_1_ht', 'player_2_ht', 'player_1_ioc', 'player_2_ioc', 'player_1_name',
-       'player_2_name', 'player_1_rank', 'player_2_rank',
-       'player_1_rank_points', 'player_2_rank_points', 'player_1_wins', 'round_ER', 'round_F', 'round_QF', 'round_R128', 'round_R16', 'round_R32', 'round_R64', 'round_RR', 'round_SF', 'player_1_hand_R', 'player_1_hand_L', 
-       'tourney_level_A', 'tourney_level_D', 'tourney_level_F', 'tourney_level_G', 'tourney_level_M', 'surface_Carpet', 'surface_Clay',
-       'surface_Grass', 'surface_Hard']].copy(0)
-    # drop null rows in specific columns
-    df = df[df.player_1_hand.notnull()]
-    df = df[df.player_2_hand.notnull()]
-    df = df[df.player_1_ht.notnull()]
-    df = df[df.player_2_ht.notnull()]
-    df = df[df.player_1_rank.notnull()]
-    df = df[df.player_2_rank.notnull()]
-    df = df[df.player_1_rank_points.notnull()]
-    df = df[df.player_2_rank_points.notnull()]
-    
-    # winner and loser rank columns
-    df['winner_rank'] = np.where(df['winner'] == df['player_1_name'], df['player_1_rank'], df['player_2_rank'])
-    df['loser_rank'] = np.where(df['winner'] == df['player_2_name'], df['player_1_rank'], df['player_2_rank'])
-    
-    # Calculate the difference in stats between player1 and playeer2. Save to new column. 
-    df['ht_diff'] = df.player_1_ht - df.player_2_ht
-    df['age_diff'] = df.player_1_age - df.player_2_age
-    df['rank_diff'] = df.player_1_rank - df.player_2_rank
-    df['rank_points_diff'] = df.player_1_rank_points - df.player_2_rank_points
-    
-    # upset column
-    df['no_upset'] = df['winner_rank'] < df['loser_rank']
-    
-    # year column
-    df['year'] = (df['tourney_id'].str[0:4]).astype(int)
-    
-    return df
-
-
-def train_validate_test_split(df):
-    '''
-    This function takes in a dataframe (df) and returns 3 dfs
-    (train, validate, and test) split 20%, 24%, 56% respectively. 
-    
-    Also takes in a random seed for replicating results.  
-    '''
-    
-    from sklearn.model_selection import train_test_split
-     
-    train_and_validate, test = train_test_split(
-        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
-    )
-    train, validate = train_test_split(
-        train_and_validate,
-        test_size=0.3,
-        random_state=123,
-        stratify=train_and_validate.player_1_wins,
-    )
-    return train, validate, test
