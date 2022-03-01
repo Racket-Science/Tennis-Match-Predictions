@@ -88,15 +88,15 @@ def get_pie_wins_mur_fed():
 
 #### bar graphs by year
 def rod_mur_bar():
-    years = [i for i in range(1999, 2019)]
-    fedwins = [0 for i in range(1999, 2019)]
-    murwins = [0 for i in range(1999, 2019)]
+    years = [i for i in range(2004, 2019)]
+    fedwins = [0 for i in range(2004, 2019)]
+    murwins = [0 for i in range(2004, 2019)]
 
     for index, row in Murray_Federer.iterrows():
         if row['winner'] == "Andy Murray":
-            murwins[row['year'] - 2000] += 1
+            murwins[row['year'] - 2004] += 1
         elif row['winner'] == "Roger Federer":
-            fedwins[row['year'] - 2000] += 1
+            fedwins[row['year'] - 2004] += 1
     plt.figure(figsize=(12,8))
 
     #barwith and position
@@ -110,7 +110,7 @@ def rod_mur_bar():
 
     # Add xticks on the middle of the group bars
     plt.title('Plotting Roger Federer vs Andy Murray over the years', fontweight='bold')
-    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2019)])
+    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(2004, 2019)])
     plt.xlabel("Year")
     plt.ylabel("# of Wins")
 
@@ -208,9 +208,9 @@ def rod_fed_bar():
     Rodrick_Federer = Rodrick_Federer[Rodrick_Federer.player_2 == 'Roger Federer']
     Rodrick_Federer['year'] = (Rodrick_Federer['tourney_id'].str[0:4]).astype(int)
 
-    years = [i for i in range(1999, 2019)]
-    fedwins = [0 for i in range(1999, 2019)]
-    rodwins = [0 for i in range(1999, 2019)]
+    years = [i for i in range(1999, 2014)]
+    fedwins = [0 for i in range(1999, 2014)]
+    rodwins = [0 for i in range(1999, 2014)]
 
     for index, row in Rodrick_Federer.iterrows():
         if row['winner'] == "Andy Roddick":
@@ -230,7 +230,7 @@ def rod_fed_bar():
 
     # Add xticks on the middle of the group bars
     plt.title('Plotting Roger Federer vs Andy Roddick over the years', fontweight='bold')
-    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2019)])
+    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2014)])
     plt.xlabel("Year")
     plt.ylabel("# of Wins")
 
@@ -341,15 +341,15 @@ Nadal_Federer['year'] = (Nadal_Federer['tourney_id'].str[0:4]).astype(int)
 #### bar graphs by year
 
 def rod_nad_bar():
-    years = [i for i in range(1999, 2019)]
-    fedwins = [0 for i in range(1999, 2019)]
-    nadwins = [0 for i in range(1999, 2019)]
+    years = [i for i in range(2003, 2020)]
+    fedwins = [0 for i in range(2003, 2020)]
+    nadwins = [0 for i in range(2003, 2020)]
 
     for index, row in Nadal_Federer.iterrows():
         if row['winner'] == "Rafael Nadal":
-            nadwins[row['year'] - 2004] += 1
+            nadwins[row['year'] - 2003] += 1
         elif row['winner'] == "Roger Federer":
-            fedwins[row['year'] - 2004] += 1
+            fedwins[row['year'] - 2003] += 1
     plt.figure(figsize=(12,8))
 
     #barwith and position
@@ -363,7 +363,7 @@ def rod_nad_bar():
 
     # Add xticks on the middle of the group bars
     plt.title('Plotting Roger Federer vs Rafael Nadal over the years', fontweight='bold')
-    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2019)])
+    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(2003, 2020)])
     plt.xlabel("Year")
     plt.ylabel("# of Wins")
 
@@ -455,9 +455,9 @@ Djokovic_Federer['year'] = (Djokovic_Federer['tourney_id'].str[0:4]).astype(int)
 
 ##### Bar Graph By Year
 def fed_djo_bar():
-    years = [i for i in range(1999, 2019)]
-    fedwins = [0 for i in range(1999, 2019)]
-    djowins = [0 for i in range(1999, 2019)]
+    years = [i for i in range(2004, 2020)]
+    fedwins = [0 for i in range(2004, 2020)]
+    djowins = [0 for i in range(2004, 2020)]
 
     for index, row in Djokovic_Federer.iterrows():
         if row['winner'] == "Novak Djokovic":
@@ -477,7 +477,7 @@ def fed_djo_bar():
 
     # Add xticks on the middle of the group bars
     plt.title('Plotting Roger Federer vs Novak Djokovic over the years', fontweight='bold')
-    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(1999, 2019)])
+    plt.xticks([r + barWidth - 0.2 for r in range(len(fedwins))], [i for i in range(2004, 2020)])
     plt.xlabel("Year")
     plt.ylabel("# of Wins")
 
@@ -548,7 +548,7 @@ def get_pie_tourney_level_fed_djo():
     Roger_Federer2 = df[df.player_2.isin(['Roger Federer'])] 
     Andy_djoray1 = df[df.player_1.isin(['Novak Djokovic'])]
     Andy_djoray2 = df[df.player_2.isin(['Novak Djokovic'])] 
-    
+
     # activate subplots objects
     fig, axs = plt.subplots(2, 2, figsize=(10,8))
 
