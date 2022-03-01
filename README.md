@@ -10,7 +10,7 @@
 
 ### Project Goals
 
-Analizy data from 1999 to 2019  to:
+Analyze data from 1999 to 2019 to:
 
 1. Create machine-learning algorithm to predict the outcome of a tennis match between two players
  
@@ -23,77 +23,103 @@ Analizy data from 1999 to 2019  to:
 
 ### Initial Questions
 
-    I. Does a difference in career average break points saved impact victory?
+- What aspects of the game drive the performance of the players?
+- Do Federer's rivalries take a different story at Grand Slam events?
+- Do higher ranked players win more?
+- Does the court surface matter?
 
-    II. Does a difference in career average break points won impact victory?
+## Data Dictionary
+#### DatetimeIndex: 35969 entries, 1999-01-11 to 2019-11-24
+ 
+ |  #  | Column                            |  Non-Null Count | Dtype   | Description
+ |:--- |:----------------------------------|:--------------- |:--------|:----------------------------------------------------------------------------------
+ | 0   | tourney_id                        |  35969 non-null | object  | Unique identifier for the tournament that the record of match data belongs to.
+ | 1   | tourney_name                      |  35969 non-null | object  | Name of the tournament the recorded match belongs to.
+ | 2   | surface                           |  35969 non-null | object  | Court construction type - surface material of the court the match is played on.
+ | 3   | draw_size                         |  35969 non-null | int64   | Number of players in a tournament rounded to nearest power of 2.
+ | 4   | tourney_level                     |  35969 non-null | object  | Level of tournament: G = Grand Slams, M = Masters 1000, A = Other tour level events.
+ | 5   | match_num                         |  35969 non-null | int64   | Match specific identifier within the tourney id.
+ | 6   | score                             |  35969 non-null | object  | The final results of the match outcome.
+ | 7   | best_of                           |  35969 non-null | int64   | The match format. 3 = Best of 3 sets, 5 = Best of 5 sets for the match.
+ | 8   | round                             |  35969 non-null | object  | What round the match is in a tournament. RR = Round robin, ER = Early rounds.
+ | 9   | minutes                           |  35543 non-null | float64 | Match length.
+ | 10  | player_1                          |  35969 non-null | object  | One of the players featured in a match.
+ | 11  | player_2                          |  35969 non-null | object  | The other player featured in the match.
+ | 12  | player_1_age                      |  35969 non-null | float64 | Age of player 1 at the time of the match.
+ | 13  | player_2_age                      |  35969 non-null | float64 | Age of player 2 at the time of the match.
+ | 14  | player_1_hand                     |  35969 non-null | object  | Dominant hand for player 1.
+ | 15  | player_2_hand                     |  35969 non-null | object  | Dominant hand for player 2.
+ | 16  | player_1_ht                       |  35969 non-null | float64 | Height of player 1.
+ | 17  | player_2_ht                       |  35969 non-null | float64 | Height of player 2.
+ | 18  | player_1_id                       |  35969 non-null | int64   | Unique player identifier for player 1.
+ | 19  | player_2_id                       |  35969 non-null | int64   | Unique player identifier for player 2.
+ | 20  | player_1_ioc                      |  35969 non-null | object  | Country of origin for player 1.
+ | 21  | player_2_ioc                      |  35969 non-null | object  | Country of origin for player 2.
+ | 22  | player_1_rank                     |  35952 non-null | float64 | Player 1 rank at time of match.
+ | 23  | player_2_rank                     |  35953 non-null | float64 | Player 2 rank at time of match.
+ | 24  | player_1_rank_points              |  35969 non-null | float64 | Player 1 rank points at the start of the tournament.
+ | 25  | player_2_rank_points              |  35969 non-null | float64 | Player 2 rank points at the start of the tournament.
+ | 26  | player_1_seed                     |  13218 non-null | float64 | Player 1 seed for the tournament, if seeded.
+ | 27  | player_2_seed                     |  14181 non-null | float64 | Player 2 seed for the tournament, if seeded.
+ | 28  | player_1_aces                     |  35969 non-null | float64 | Number of serves from player 1 in the match completely untouched by player 2.
+ | 29  | player_2_aces                     |  35969 non-null | float64 | Number of serves from player 2 in the match completely untouched by player 1.
+ | 30  | player_1_double_faults            |  35969 non-null | float64 | Number of times player 1 failed to start a point by faulting twice (free p2 point).
+ | 31  | player_2_double_faults            |  35969 non-null | float64 | Number of times player 2 failed to start a point by faulting twice (free p1 point).
+ | 32  | player_1_service_points           |  35969 non-null | float64 | Number of points player 1 played on his serve.
+ | 33  | player_2_service_points           |  35969 non-null | float64 | Number of points player 2 played on his serve.
+ | 34  | player_1_first_serves_in          |  35969 non-null | float64 | Number of first serves player 1 made.
+ | 35  | player_2_first_serves_in          |  35969 non-null | float64 | Number of first serves player 2 made.
+ | 36  | player_1_first_serve_points_won   |  35969 non-null | float64 | Number of first serve points won by player 1.
+ | 37  | player_2_first_serve_points_won   |  35969 non-null | float64 | Number of first serve points won by player 2.
+ | 38  | player_1_second_serve_points_won  |  35969 non-null | float64 | Number of second serve points won by player 1.
+ | 39  | player_2_second_serve_points_won  |  35969 non-null | float64 | Number of second serve points won by player 2.
+ | 40  | player_1_service_game_total       |  35969 non-null | float64 | Number of games player 1 served in a match.
+ | 41  | player_2_service_game_total       |  35969 non-null | float64 | Number of games player 2 served in a match.
+ | 42  | player_1_break_points_saved       |  35969 non-null | float64 | Number of points player 1 won to stave off a break of serve.
+ | 43  | player_2_break_points_saved       |  35969 non-null | float64 | Number of points player 2 won to stave off a break of serve.
+ | 44  | player_1_break_points_faced       |  35969 non-null | float64 | Number of break points player 1 faced.
+ | 45  | player_2_break_points_faced       |  35969 non-null | float64 | Number of break points player 2 faced.
+ | 46  | winner                            |  35969 non-null | object  | The name of the winner.
+ | 47  | player_1_first_serve_%            |  35969 non-null | float64 | Percent of first serves in for player 1.
+ | 48  | player_2_first_serve_%            |  35969 non-null | float64 | Percent of first serves in for player 2.
+ | 49  | player_1_first_serve_win_%        |  35969 non-null | float64 | Percent of first service points won for player 1.
+ | 50  | player_2_first_serve_win_%        |  35967 non-null | float64 | Percent of first service points won for player 2.
+ | 51  | player_1_break_points_won         |  35969 non-null | float64 | Number of times player 1 broke player 2's service.
+ | 52  | player_2_break_points_won         |  35969 non-null | float64 | Number of times player 2 broke player 2's service.
+ | 53  | player_1_wins                     |  35969 non-null | bool    | Target variable. Column that designates whether or not player 1 won the match.
+ | 54  | player_2_seeded                   |  35969 non-null | bool    | Boolean value that designates whether or not player 2 is seeded.
+ | 55  | player_1_seeded                   |  35969 non-null | bool    | Boolean value that designates whether or not player 1 is seeded.
+ | 56  | surface_Carpet                    |  35969 non-null | uint8   | Boolean value that deisgnates if the match was played on carpet.
+ | 57  | surface_Clay                      |  35969 non-null | uint8   | Boolean value that designates if the match was played on clay.
+ | 58  | surface_Grass                     |  35969 non-null | uint8   | Boolean value that designates if the match was played on grass.
+ | 59  | surface_Hard                      |  35969 non-null | uint8   | Boolean balue that designates if the match was played on hard court.
+ | 60  | tourney_level_A                   |  35969 non-null | uint8   | Bool: whether or not the tournament was an tour level event.
+ | 61  | tourney_level_D                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Davis Cup event.
+ | 62  | tourney_level_F                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Tour Finals or other season-ending event.
+ | 63  | tourney_level_G                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Grand Slam event.
+ | 64  | tourney_level_M                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Masters 1000 event.
+ | 65  | player_1_hand_L                   |  35969 non-null | uint8   | Bool: whether or not player 1 plays left-handed.
+ | 66  | player_1_hand_R                   |  35969 non-null | uint8   | Bool: whether or not player 1 plays right-handed.
+ | 67  | player_2_hand_L                   |  35969 non-null | uint8   | Bool: whether or not player 2 plays left-handed.
+ | 68  | player_2_hand_R                   |  35969 non-null | uint8   | Bool: whether or not player 2 plays right-handed.
+ | 69  | round_ER                          |  35969 non-null | uint8   | Bool: whether or not the match was in the early rounds.
+ | 70  | round_F                           |  35969 non-null | uint8   | Bool: whether or not the match was the final round.
+ | 71  | round_QF                          |  35969 non-null | uint8   | Bool: whether or not the match was a quarter-final.
+ | 72  | round_R128                        |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 128
+ | 73  | round_R16                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 16.
+ | 74  | round_R32                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 32.
+ | 75  | round_R64                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 64.
+ | 76  | round_RR                          |  35969 non-null | uint8   | Bool: whether or not the match was a round robin match.
+ | 77  | round_SF                          |  35969 non-null | uint8   | Bool: whether or not the match was a semifinal.
 
-    III. Does a difference in career percent-of-break-points-won impact victory?
-
-    IV. What are the drivers that determine a change in the dynamic between two players? Is there anything in our data set to suggest a change in dynamic?
-
-    V. How do key rivalries play out on clay? On grass? On hard court?
-
-### Data Dictionary
-    A list of the variables in the dataframe and their meaning. 
-
-| -------------- | --------- |------------------------ |
-| Variable       | Datatype| Description               |
-| -------------- | --------- |------------------------ |
-|player_1_wins   |           | Target variable. Indicates if person  classified as player one has won the game|
-| PlayerID    |int64|Unique player identification| 
-|Player Name|object|Represents the players name| 
-|Age|float64|                         | 
-|Height|float64|Represents the height of the player| 
-|MaxRank|float64|Maximum rank achieved by player in the length of our database| 
-|Hand|object|Represents dominant hand of player R = right, L = left| 
-|Country|object|Country of descendants of the player| 
-|win_count|float64|Number of wins for the for the period of time of our database|
-|lose_count|float64|Number of losses for the period of time of our database| 
-|match_count|float64|Total matches just played for the period of time of our database| 
-|win%|float64|Total wins divided by the sum of losses and wins| 
-|aces_in_match_lost|float64|Times rival answers first serve| 
-|aces_in_match_won|float64|Times player serving the ball gets a point without the contest of rival| 
-|ace_count|float64|Total count of aces for the period of time of our database| 
-|aces_per_game|float64|Count of aces in a game| 
-|first_serve_percentage_match_lost|float64|                         | 
-|first_serve_percentage_match_won|float64|                         | 
-|first_serve_won_percentage_match_lost|float64|                         | 
-|first_serve_won_percentage_match_won|float64|                         | 
-|breakpoints_won_match_lost|float64|                         | 
-|breakpoints_won_match_won|float64|                         | 
-|breakpoint_count|float64|Total count of all breakpoints for the period of time of our database| 
-|breakpoints_per_game|float64|Total count of brakpoints in a game| 
-|win_count_30|float64|| 
-|loss_count_30|float64|                         | 
-|win_count_100|float64|                         | 
-|loss_count_100|float64|                         | 
-|total_top30_matches|float64|                         | 
-|total_top100_matches|float64|                         | 
-|top_30_win%|float64|                         | 
-|top_100_win%|float64|                         | 
-|tourney_level|uint8|                         | 
-|best_of|int64|                         | 
-|player_1|string|Name of player one| 
-|player_2|sring|Name of player two| 
-|player_ioc|object|                         | 
-|player_rank|float64|Rank of player at the time of match| 
-|player_1_wins|bool|                         | 
-|round|object|                         | 
-|surface|object|Represents the type of material the floor of the court is made of| 
-|ht_diff|float64|Hight difference between players| 
-|age_diff|float64|Age difference at the time of match| 
-|rank_diff|float64|Rank difference at the time of match| 
-|rank_points_diff|float64|Rank points difference at the time of match| 
-|winner_rank|float64|Rank of winner| 
-|loser_rank|float64|Rank of looser
-
+ 
+Break Point: If a player wins a break point, they win the service game of the opponent.
   
 
 ### Steps to Reproduce 
 
-        1. Clone this repo containing the Final_Report as well as the helper files.
-        2. Create a .gitignore with .csv listed to prevent pushing any large CSVs to github. 
-        3. That should be all you need to do run the Final_Report!
+        1. Clone this repo.
+        2. That should be all you need to do run the MVP Notebook!
 
 ### The Plan 
         - Planning
@@ -101,33 +127,45 @@ Analizy data from 1999 to 2019  to:
             - Creare chats on slack and discord for team engagement
             - Gain domain knowledge
         - Wrangle (Acquire and Prepare)
-            - Create wrangle.py with functions for aquiring and prepping the data
+            - Create acquire.py and prepare.py with functions for data acquisition and preparation.
+            - Split data for feature exploration and modeling
         - Explore
-            - ask initial questions of the data
-            - answer questions with visuals and statistics 
+            - Ask initial questions of the data
+            - Answer questions with visuals and statistics 
         - Model
-            - for mvp (features: )
-            - target : outcome (win/loss)
+            - For mvp (features: player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_Clay)
+            - Target : outcome (player 1 win/loss)
             - 3 best models
-            - on best model provide visuals of how it preformed on the test sample
-
-        - Refine (Report)
-            - state what states and counties the homes are located in (fips)
-            - project overview, goals, initial questions conclusion (did reach goal?, key findings, recommendations, and next steps)
-            - Make sure markdown is clear on it's own.
-            - Make sure all code is commented out. 
+            - On best model provide visuals of how it preformed on the test sample
 
         - Deliver
             - README.md
-            - Wrangle.py
-            - working notebook(s)
-            - report notebook
-            - presentaion of report notebook
+            - *.py
+            - Working report notebook
+            - Slides presentation
 
 ## Conclusion:
-
+* Rivals that won half or more meetings with Federer beat him at Grand Slam events
+* The surface of the court affects the outcome of players performance
+* Players performed differently based on the tourney level
+* Higher ranked players win more often (about 64.28% of the time)
+* Baseline beat our best model by 6%
 
 ## With more time...
+- Create a model to predict if a player will reach the top 30 ranking by evaluating their first 50 games
+- Filter for players that hit a max rank of 100 or better
+- Aggregate full stats for Aces, Breakpoints, Double Faults, Wins, and First Serve Win by Match
+- Aggregate career performance by court surface (hard, grass, clay, carpet)
+- Aggregate first 50 matches statistics - later use to predict future ranking
+
+#### Questions for our further exploration:
+- Does a difference in career average break points won impact victory?
+- Does a difference in career average break points saved impact victory?
+- What characteristics and trends determine a player to become a top 30?
+- Does surface performance predict a player's future rank?
+- Does a difference in career percent-of-break-points-won impact victory?
+
+
 
 # License Information
 
