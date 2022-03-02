@@ -1,5 +1,5 @@
 
-# Data means nothing unless it is telling a story. 
+# Data means nothing unless it tells a story. 
 
 ## Instructor Notes: 
 
@@ -20,7 +20,7 @@ Biggest takeaway from instructor feedback:
 4. Rename features
 
 
-## Structure for or story Filled in
+## Structure for our story Filled in
 Goal (opening spiel):
 We are the Racket Science team and our goal is to take data from the last 20 years of professional men's tennis and explore it to identify drivers of win. Using modern machine learning algorithms, we aim to predict the outcome of future matches. We are also delving into the career stats of Roger Federer whom some consider to be the best to ever play the game. We are discovering his drivers of greatness and comparing those drivers to his top rivals to see if he is truly unmatched or if he has been dethroned. We are also exploring the first 50 games of Federer and his rivals to determine if their rise to tennis fame could have been predicted early on. 
 
