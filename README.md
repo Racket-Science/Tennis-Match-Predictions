@@ -1,10 +1,10 @@
 # Tennis Match Prediction
 
 ### Team Members: 
-- Chole Whitaker 
+- Chloe Whitaker 
 - Alejandro Velasquez 
 - Daniel Northcutt 
-- Mason Sharbondy
+- Mason Sherbondy
 
 ##  About the Project
 
