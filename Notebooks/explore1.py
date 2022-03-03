@@ -34,8 +34,8 @@ def clean_for_model(df):
 #     df = df[df.player_2_ht.notnull()]
 
     # winner and loser rank columns
-    df['winner_rank'] = np.where(df['winner'] == df['player_1_name'], df['player_1_rank'], df['player_2_rank'])
-    df['loser_rank'] = np.where(df['winner'] == df['player_2_name'], df['player_1_rank'], df['player_2_rank'])
+    df['winner_rank'] = np.where(df['winner'] == df['player_1'], df['player_1_rank'], df['player_2_rank'])
+    df['loser_rank'] = np.where(df['winner'] == df['player_2'], df['player_1_rank'], df['player_2_rank'])
 
     # Calculate the difference in stats between player1 and playeer2. Save to new column. 
     df['ht_diff'] = df.player_1_ht - df.player_2_ht
