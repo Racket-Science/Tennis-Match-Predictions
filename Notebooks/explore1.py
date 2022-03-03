@@ -13,6 +13,10 @@ from sklearn.model_selection import train_test_split
 import prepare
 pd.set_option("display.max_columns", None)
 
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib.colors as colors
+
 
 ############### ACQUIRE & PREPARE###############
 df = pd.read_csv('ATPMain.csv')
@@ -567,3 +571,28 @@ def get_pie_tourney_level_fed_djo():
     # display chart
     plt.tight_layout()
     plt.show()
+
+
+################ FEDERER OVER THE YEARS ################
+
+def Federer_Years():
+    rf1 = df[(df['winner'] == 'Roger Federer')].groupby(['year','tourney_level'], as_index=False).agg(['count'])
+    rf2 = rf1['tourney_id'].reset_index()
+
+    fig = plt.figure(figsize=(16,5))
+    ax = fig.add_subplot(1,1,1)
+    #jet = cm = plt.get_cmap('jet')
+
+    ax.set_prop_cycle(plt.cycler('color', plt.cm.jet(np.linspace(0, 1, 2, endpoint=True))))
+    plt.xticks(np.arange(2000, 2020))
+    plt.title('Roger Federer Wins by Tournament over the Past Two Decades')
+    plt.xlabel("Years")
+    plt.ylabel("Total Wins")
+
+
+    plt.plot(rf2[rf2['tourney_level']=='G']['year'], rf2[rf2['tourney_level']=='G']['count'], marker='*', markersize=2, linewidth=3)
+    plt.plot(rf2[rf2['tourney_level']=='M']['year'], rf2[rf2['tourney_level']=='M']['count'], linestyle='dotted')
+    plt.plot(rf2[rf2['tourney_level']=='F']['year'], rf2[rf2['tourney_level']=='F']['count'], linestyle='dotted')
+    plt.plot(rf2[rf2['tourney_level']=='D']['year'], rf2[rf2['tourney_level']=='D']['count'], linestyle='dotted')
+    plt.plot(rf2[rf2['tourney_level']=='A']['year'], rf2[rf2['tourney_level']=='A']['count'], linestyle='dotted')
+    plt.legend(['Grand_Slams', 'Masters', 'Tour_Finals', 'Davis_Cup', 'ATP'], loc='upper right', prop={'size': 10});
