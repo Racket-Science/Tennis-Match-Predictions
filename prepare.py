@@ -97,9 +97,6 @@ def prepare_atp():
     df.loc[tf_p1_index, 'player_1_ht'] = 173
     df.loc[tf_p2_index, 'player_2_ht'] = 173
 
-    # fill rank point nulls with 0
-    df.player_1_rank_points = df.player_1_rank_points.fillna(0)
-    df.player_2_rank_points = df.player_2_rank_points.fillna(0)
 
     # assign variable to list of tourney ids that have missing minutes
     missing_minutes = list(df[df.minutes.isnull()].tourney_id.unique())
@@ -121,12 +118,43 @@ def prepare_atp():
     # fill nulls with best of 3 average match length time for our data (these tournaments are all best of 3) (this is a 'quick fix')
     df.loc[mm_index, 'minutes'] = best_of_3.minutes.mean()
 
-    # fill ranking null values with string 'Unranked'
-    df.player_1_rank = df.player_1_rank.fillna('Unranked')
-    df.player_2_rank = df.player_2_rank.fillna('Unranked')
     # fill seed nulls with string 'Unseeded'
-    df.player_1_seed = df.player_1_seed.fillna('Unseeded')
-    df.player_2_seed = df.player_2_seed.fillna('Unseeded')
+    # df.player_1_seed = df.player_1_seed.fillna('Unseeded')
+    # df.player_2_seed = df.player_2_seed.fillna('Unseeded')
+
+    # fill rank points with 0, brand new on the tour
+    jg_rnull_idx = df[(df.player_1 == 'Justin Gimelstob') & (df.player_1_rank_points.isnull())].index
+    df.loc[jg_rnull_idx, 'player_1_rank_points'] = 0
+    jj_1rnull_idx = df[df.player_1 == 'Joachim Johansson'].index[0]
+    df.loc[jj_1rnull_idx, 'player_1_rank_points'] = 0
+
+    # fill rank points manually with inferred values
+    jj_2rnull_idx = df[df.player_1 == 'Joachim Johansson'].index[-1]
+    df.loc[jj_2rnull_idx, 'player_1_rank_points'] = 0
+    jj_3rnull_idx = df[(df.player_2 == 'Joachim Johansson') & (df.player_2_rank_points.isnull())].index
+    df.loc[jj_3rnull_idx, 'player_2_rank_points'] = 0
+    kc_rnull_idx = df[(df.player_1 == 'Kenneth Carlsen') & (df.player_1_rank.isnull())].index
+    df.loc[kc_rnull_idx, 'player_1_rank'] = 46
+    df.loc[kc_rnull_idx, 'player_1_rank_points'] = 880
+
+    # fill remaining rank point nulls with 0
+    df.player_1_rank_points = df.player_1_rank_points.fillna(0)
+    df.player_2_rank_points = df.player_2_rank_points.fillna(0)
+
+    # infer ranks from last match plus pentalties 
+    th_r2null_idx = df[(df.player_2 == 'Tommy Haas') & (df.player_2_rank.isnull())].index[:2]
+    df.loc[th_r2null_idx, 'player_2_rank'] = 33
+    th_r1null_idx = df[(df.player_1 == 'Tommy Haas') & (df.player_1_rank.isnull())].index
+    df.loc[th_r1null_idx, 'player_1_rank'] = 33
+    th_r3null_idx = df[(df.player_2 == 'Tommy Haas') & (df.player_2_rank.isnull())].index
+    df.loc[th_r3null_idx, 'player_2_rank'] = 490
+
+    # 'fix'
+    mrp2_idx = df[df.player_2_rank.isnull()].index
+    mrp1_idx = df[df.player_1_rank.isnull()].index
+    df.loc[mrp2_idx, 'player_2_rank'] = 300
+    df.loc[mrp1_idx, 'player_1_rank'] = 300
+
 
     # reset index to tourney date
     df = df.set_index('tourney_date')
@@ -227,7 +255,10 @@ def clean_for_model(df):
     
     # year column
     df['year'] = (df['tourney_id'].str[0:4]).astype(int)
-    
+
+    # rename columns to human readable names
+    df.rename(columns={'player_1_rank': 'player1_rank', 'player_2_rank': 'player1_rank', 'player_1_rank_points': 'player1_rankpoints', 'player_2_rank_points': 'player2_rankpoints', 'surface_Carpet': 'Carpet', 'surface_Clay': 'Clay', 'surface_Grass': 'Grass', 'surface_Hard': 'Hard'}, inplace=True)
+
     return df
 
 def train_validate_test_split(df):
