@@ -255,7 +255,10 @@ def clean_for_model(df):
     
     # year column
     df['year'] = (df['tourney_id'].str[0:4]).astype(int)
-    
+
+    # rename columns to human readable names
+    df.rename(columns={'player_1_rank': 'player1_rank', 'player_2_rank': 'player1_rank', 'player_1_rank_points': 'player1_rankpoints', 'player_2_rank_points': 'player2_rankpoints', 'surface_Carpet': 'Carpet', 'surface_Clay': 'Clay', 'surface_Grass': 'Grass', 'surface_Hard': 'Hard'}, inplace=True)
+
     return df
 
 def train_validate_test_split(df):
