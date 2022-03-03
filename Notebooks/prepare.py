@@ -198,8 +198,7 @@ def clean_for_model(df):
     df = df[['tourney_id', 'draw_size', 'winner', 'surface',
        'tourney_level', 'best_of', 'player_1', 'player_2', 'player_1_age',
        'player_2_age', 'player_1_hand',
-       'player_2_hand', 'player_1_ht', 'player_2_ht', 'player_1_ioc', 'player_2_ioc', 'player_1_name',
-       'player_2_name', 'player_1_rank', 'player_2_rank',
+       'player_2_hand', 'player_1_ht', 'player_2_ht', 'player_1_ioc', 'player_2_ioc', 'player_1_rank', 'player_2_rank',
        'player_1_rank_points', 'player_2_rank_points', 'player_1_wins', 'round_ER', 'round_F', 'round_QF', 'round_R128', 'round_R16', 'round_R32', 'round_R64', 'round_RR', 'round_SF', 'player_1_hand_R', 'player_1_hand_L', 
        'tourney_level_A', 'tourney_level_D', 'tourney_level_F', 'tourney_level_G', 'tourney_level_M', 'surface_Carpet', 'surface_Clay',
        'surface_Grass', 'surface_Hard']].copy(0)
