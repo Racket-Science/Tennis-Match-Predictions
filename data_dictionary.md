@@ -25,8 +25,8 @@
  | 19  | player_2_id                       |  35969 non-null | int64   | Unique player identifier for player 2.
  | 20  | player_1_ioc                      |  35969 non-null | object  | Country of origin for player 1.
  | 21  | player_2_ioc                      |  35969 non-null | object  | Country of origin for player 2.
- | 22  | player_1_rank                     |  35952 non-null | float64 | Player 1 rank at time of match.
- | 23  | player_2_rank                     |  35953 non-null | float64 | Player 2 rank at time of match.
+ | 22  | player_1_rank                     |  35952 non-null | float64 | Player 1 rank at the start of the tournament.
+ | 23  | player_2_rank                     |  35953 non-null | float64 | Player 2 rank at the start of the tournament.
  | 24  | player_1_rank_points              |  35969 non-null | float64 | Player 1 rank points at the start of the tournament.
  | 25  | player_2_rank_points              |  35969 non-null | float64 | Player 2 rank points at the start of the tournament.
  | 26  | player_1_seed                     |  13218 non-null | float64 | Player 1 seed for the tournament, if seeded.
@@ -56,31 +56,30 @@
  | 50  | player_2_first_serve_win_%        |  35967 non-null | float64 | Percent of first service points won for player 2.
  | 51  | player_1_break_points_won         |  35969 non-null | float64 | Number of times player 1 broke player 2's service.
  | 52  | player_2_break_points_won         |  35969 non-null | float64 | Number of times player 2 broke player 2's service.
- | 53  | player_1_wins                     |  35969 non-null | bool    | Target variable. Column that designates whether or not player 1 won the match.
+ | 53  | player_1_wins                     |  35969 non-null | bool    | Target variable. Boolean value that designates whether or not player 1 won the match.
  | 54  | player_2_seeded                   |  35969 non-null | bool    | Boolean value that designates whether or not player 2 is seeded.
  | 55  | player_1_seeded                   |  35969 non-null | bool    | Boolean value that designates whether or not player 1 is seeded.
- | 56  | surface_Carpet                    |  35969 non-null | uint8   | Boolean value that deisgnates if the match was played on carpet.
- | 57  | surface_Clay                      |  35969 non-null | uint8   | Boolean value that designates if the match was played on clay.
- | 58  | surface_Grass                     |  35969 non-null | uint8   | Boolean value that designates if the match was played on grass.
- | 59  | surface_Hard                      |  35969 non-null | uint8   | Boolean balue that designates if the match was played on hard court.
- | 60  | tourney_level_A                   |  35969 non-null | uint8   | Bool: whether or not the tournament was an tour level event.
- | 61  | tourney_level_D                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Davis Cup event.
- | 62  | tourney_level_F                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Tour Finals or other season-ending event.
- | 63  | tourney_level_G                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Grand Slam event.
- | 64  | tourney_level_M                   |  35969 non-null | uint8   | Bool: whether or not the tournament was a Masters 1000 event.
- | 65  | player_1_hand_L                   |  35969 non-null | uint8   | Bool: whether or not player 1 plays left-handed.
- | 66  | player_1_hand_R                   |  35969 non-null | uint8   | Bool: whether or not player 1 plays right-handed.
- | 67  | player_2_hand_L                   |  35969 non-null | uint8   | Bool: whether or not player 2 plays left-handed.
- | 68  | player_2_hand_R                   |  35969 non-null | uint8   | Bool: whether or not player 2 plays right-handed.
- | 69  | round_ER                          |  35969 non-null | uint8   | Bool: whether or not the match was in the early rounds.
- | 70  | round_F                           |  35969 non-null | uint8   | Bool: whether or not the match was the final round.
- | 71  | round_QF                          |  35969 non-null | uint8   | Bool: whether or not the match was a quarter-final.
- | 72  | round_R128                        |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 128
- | 73  | round_R16                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 16.
- | 74  | round_R32                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 32.
- | 75  | round_R64                         |  35969 non-null | uint8   | Bool: whether or not the match was in the round of 64.
- | 76  | round_RR                          |  35969 non-null | uint8   | Bool: whether or not the match was a round robin match.
- | 77  | round_SF                          |  35969 non-null | uint8   | Bool: whether or not the match was a semifinal.
-
+ | 56  | surface_Carpet                    |  35969 non-null | uint8   | Whether or not the match was played on carpet. 1 = Yes, 0 = No.
+ | 57  | surface_Clay                      |  35969 non-null | uint8   | Whether or not the match was played on clay. 1 = Yes, 0 = No.
+ | 58  | surface_Grass                     |  35969 non-null | uint8   | Whether or not the match was played on grass. 1 = Yes, 0 = No.
+ | 59  | surface_Hard                      |  35969 non-null | uint8   | Whether or not the match was played on hard court. 1 = Yes, 0 = No.
+ | 60  | tourney_level_A                   |  35969 non-null | uint8   | Whether or not the tournament was an tour level event. 1 = Yes, 0 = No.
+ | 61  | tourney_level_D                   |  35969 non-null | uint8   | Whether or not the tournament was a Davis Cup event. 1 = Yes, 0 = No.
+ | 62  | tourney_level_F                   |  35969 non-null | uint8   | Whether or not the tournament was a Tour Finals or season-ending event. 1 = Yes, 0 = No.
+ | 63  | tourney_level_G                   |  35969 non-null | uint8   | Whether or not the tournament was a Grand Slam event. 1 = Yes, 0 = No.
+ | 64  | tourney_level_M                   |  35969 non-null | uint8   | Whether or not the tournament was a Masters 1000 event. 1 = Yes, 0 = No.
+ | 65  | player_1_hand_L                   |  35969 non-null | uint8   | Whether or not player 1 plays left-handed. 1 = Yes, 0 = No.
+ | 66  | player_1_hand_R                   |  35969 non-null | uint8   | Whether or not player 1 plays right-handed. 1 = Yes, 0 = No.
+ | 67  | player_2_hand_L                   |  35969 non-null | uint8   | Whether or not player 2 plays left-handed. 1 = Yes, 0 = No.
+ | 68  | player_2_hand_R                   |  35969 non-null | uint8   | Whether or not player 2 plays right-handed. 1 = Yes, 0 = No.
+ | 69  | round_ER                          |  35969 non-null | uint8   | Whether or not the match was in the early rounds. 1 = Yes, 0 = No.
+ | 70  | round_F                           |  35969 non-null | uint8   | Whether or not the match was the final round. 1 = Yes, 0 = No.
+ | 71  | round_QF                          |  35969 non-null | uint8   | Whether or not the match was a quarter-final. 1 = Yes, 0 = No.
+ | 72  | round_R128                        |  35969 non-null | uint8   | Whether or not the match was in the round of 128 1 = Yes, 0 = No.
+ | 73  | round_R16                         |  35969 non-null | uint8   | Whether or not the match was in the round of 16. 1 = Yes, 0 = No.
+ | 74  | round_R32                         |  35969 non-null | uint8   | Whether or not the match was in the round of 32. 1 = Yes, 0 = No.
+ | 75  | round_R64                         |  35969 non-null | uint8   | Whether or not the match was in the round of 64. 1 = Yes, 0 = No.
+ | 76  | round_RR                          |  35969 non-null | uint8   | Whether or not the match was a round robin match. 1 = Yes, 0 = No.
+ | 77  | round_SF                          |  35969 non-null | uint8   | Whether or not the match was a semifinal. 1 = Yes, 0 = No.
  
 Break Point: If a player wins a break point, they win the service game of the opponent.
