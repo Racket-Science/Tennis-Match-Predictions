@@ -144,27 +144,6 @@ def prepare_atp():
     
     return df
 
-def train_validate_test_split(df):
-    '''
-    This function takes in a dataframe (df) and returns 3 dfs
-    (train, validate, and test) split 20%, 24%, 56% respectively. 
-    
-    Also takes in a random seed for replicating results.  
-    '''
-    
-    from sklearn.model_selection import train_test_split
-     
-    train_and_validate, test = train_test_split(
-        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
-    )
-    train, validate = train_test_split(
-        train_and_validate,
-        test_size=0.3,
-        random_state=123,
-        stratify=train_and_validate.player_1_wins
-    )
-    return train, validate, test
-
 def calculate_column_nulls(df):
 
     '''
@@ -213,3 +192,62 @@ def calculate_row_nulls(df):
     row_nulls = row_nulls.sort_values('nulls', ascending = False)   # sort
 
     return row_nulls 
+
+def clean_for_model(df):    
+   
+    df = df[['tourney_id', 'draw_size', 'winner', 'surface',
+       'tourney_level', 'best_of', 'player_1', 'player_2', 'player_1_age',
+       'player_2_age', 'player_1_hand',
+       'player_2_hand', 'player_1_ht', 'player_2_ht', 'player_1_ioc', 'player_2_ioc', 'player_1_name',
+       'player_2_name', 'player_1_rank', 'player_2_rank',
+       'player_1_rank_points', 'player_2_rank_points', 'player_1_wins', 'round_ER', 'round_F', 'round_QF', 'round_R128', 'round_R16', 'round_R32', 'round_R64', 'round_RR', 'round_SF', 'player_1_hand_R', 'player_1_hand_L', 
+       'tourney_level_A', 'tourney_level_D', 'tourney_level_F', 'tourney_level_G', 'tourney_level_M', 'surface_Carpet', 'surface_Clay',
+       'surface_Grass', 'surface_Hard']].copy(0)
+    # drop null rows in specific columns
+    df = df[df.player_1_hand.notnull()]
+    df = df[df.player_2_hand.notnull()]
+    df = df[df.player_1_ht.notnull()]
+    df = df[df.player_2_ht.notnull()]
+    df = df[df.player_1_rank.notnull()]
+    df = df[df.player_2_rank.notnull()]
+    df = df[df.player_1_rank_points.notnull()]
+    df = df[df.player_2_rank_points.notnull()]
+    
+    # winner and loser rank columns
+    df['winner_rank'] = np.where(df['winner'] == df['player_1_name'], df['player_1_rank'], df['player_2_rank'])
+    df['loser_rank'] = np.where(df['winner'] == df['player_2_name'], df['player_1_rank'], df['player_2_rank'])
+    
+    # Calculate the difference in stats between player1 and playeer2. Save to new column. 
+    df['ht_diff'] = df.player_1_ht - df.player_2_ht
+    df['age_diff'] = df.player_1_age - df.player_2_age
+    df['rank_diff'] = df.player_1_rank - df.player_2_rank
+    df['rank_points_diff'] = df.player_1_rank_points - df.player_2_rank_points
+    
+    # upset column
+    df['no_upset'] = df['winner_rank'] < df['loser_rank']
+    
+    # year column
+    df['year'] = (df['tourney_id'].str[0:4]).astype(int)
+    
+    return df
+
+def train_validate_test_split(df):
+    '''
+    This function takes in a dataframe (df) and returns 3 dfs
+    (train, validate, and test) split 20%, 24%, 56% respectively. 
+    
+    Also takes in a random seed for replicating results.  
+    '''
+    
+    from sklearn.model_selection import train_test_split
+     
+    train_and_validate, test = train_test_split(
+        df, test_size=0.2, random_state=123, stratify=df.player_1_wins
+    )
+    train, validate = train_test_split(
+        train_and_validate,
+        test_size=0.3,
+        random_state=123,
+        stratify=train_and_validate.player_1_wins,
+    )
+    return train, validate, test
