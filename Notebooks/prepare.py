@@ -257,8 +257,8 @@ def clean_for_model(df):
     df['year'] = (df['tourney_id'].str[0:4]).astype(int)
 
     # rename columns to human readable names
-    df.rename(columns={'player_1_rank': 'player1_rank', 'player_2_rank': 'player1_rank', 'player_1_rank_points': 'player1_rankpoints', 'player_2_rank_points': 'player2_rankpoints', 'surface_Carpet': 'Carpet', 'surface_Clay': 'Clay', 'surface_Grass': 'Grass', 'surface_Hard': 'Hard'}, inplace=True)
-
+    df.rename(columns={'player_1_rank': 'player1_rank', 'player_2_rank': 'player1_rank', 'player_1_rank_points': 'player1_rankpoints', 'player_2_rank_points': 'player2_rankpoints', 'surface_Carpet': 'Carpet', 'surface_Clay': 'Clay', 'surface_Grass': 'Grass', 'surface_Hard': 'Hard', 'player_1_hand_R': 'player1_righthand', 'player_2_hand_R': 'player2_righthand', 'player_1_hand_L': 'player1_lefthand', 'player_2_hand_L': 'player2_lefthand'}, inplace=True)
+    
     return df
 
 def train_validate_test_split(df):
