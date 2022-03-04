@@ -167,7 +167,7 @@ def get_random_forest(X_train, X_validate, y_train, y_validate):
     returns random forest accuracy on train and validate data'''
 
     # create model object and fit it to training data
-    rf = RandomForestClassifier(max_depth=13, min_samples_leaf=3, random_state=123)
+    rf = RandomForestClassifier(max_depth=9, min_samples_leaf=7, random_state=123)
     rf.fit(X_train, y_train)
 
     # print result
@@ -204,7 +204,36 @@ def get_log_reg(X_train, X_validate, y_train, y_validate):
 
 
 # In[ ]:
+def random_val(X_train, X_validate, y_train, y_validate):
+    metrics = []
+    max_depth = 16
 
+    for i in range(1, max_depth):
+        # Create model
+        depth = max_depth - i
+        n = i
+        forest = RandomForestClassifier(max_depth=depth, min_samples_leaf=n, random_state=123)
 
+        # Fit the model (on train and only train)
+        forest = forest.fit(X_train, y_train)
+
+        # Use the model
+        # We'll evaluate the model's performance on train, first
+        in_sample_accuracy = forest.score(X_train, y_train)
+        
+        out_of_sample_accuracy = forest.score(X_validate, y_validate)
+
+        output = {
+            "min_samples_per_leaf": n,
+            "max_depth": depth,
+            "train_accuracy": in_sample_accuracy,
+            "validate_accuracy": out_of_sample_accuracy
+        }
+        
+        metrics.append(output)
+        
+    mf = pd.DataFrame(metrics)
+    mf["difference"] = mf.train_accuracy - mf.validate_accuracy
+    mf
 
 
