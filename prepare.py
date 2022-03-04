@@ -19,7 +19,7 @@ def prepare_atp():
     df = df['1999-01-01':'2020-01-01']
 
     # create target variable 
-    df['player_1_wins'] = np.where(df['winner'] == df['player_1_name'], True, False)
+    df['player_1_wins'] = np.where(df['winner'] == df['player_1'], True, False)
     
     # drop all walkovers (no useful stats) and best of 1 matches (extremely rare format)
     df = df.drop(df[df.score == 'W/O'].index)
@@ -161,7 +161,7 @@ def prepare_atp():
     df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
 
     # drop superfluous
-    df = df.drop(columns = ['player_1_name', 'player_2_name'])
+    # df = df.drop(columns = ['player_1', 'player_2'])
 
     df_clean = df = df.dropna(subset=['player_1_aces'])
 
