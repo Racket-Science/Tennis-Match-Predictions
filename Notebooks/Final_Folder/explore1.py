@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import re
 from sklearn.model_selection import train_test_split
-import proper_prep
+import prepare2  
 pd.set_option("display.max_columns", None)
 
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ import matplotlib.colors as colors
 
 ############### WRANGLE ###############
 
-df = proper_prep.prepare_atp()
+df = prepare2.prepare_atp()
 
 ############### Further Prepare ###############
 def clean_for_model(df):

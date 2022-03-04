@@ -15,7 +15,7 @@ import numpy as np
 import regex as re
 
 # Custom Helper Files
-from proper_prep import *
+from prepare2 import *
 
 # Stats
 from scipy import stats

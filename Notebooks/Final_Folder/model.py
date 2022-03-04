@@ -13,7 +13,7 @@ import numpy as np
 import regex as re
 
 # Custom Helper Files
-from proper_prep import prepare_atp, train_validate_test_split
+from prepare2 import prepare_atp, train_validate_test_split
 
 # Stats
 from scipy import stats
