@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 
 
 def prepare_atp():
@@ -214,6 +215,8 @@ def prepare_atp():
     # reset index to tourney date
     df = df.set_index('tourney_date')
     df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
+
+    # df.to_csv('takes_too_long.csv')
 
     return df
 
