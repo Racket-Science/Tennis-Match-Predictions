@@ -53,35 +53,43 @@ player_1_rank, player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_C
 
 4. When they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
 
+5. Modeling
+
  - End. in the end, our takeaway is C
 
 
 ## Slide Ideas and structure: 
 
-Cover slide:
+Slide Presentastion Break-down: 
 
-Slide of the team (photos):
 
-Data Science pipeline slide:
+Alejandro - Intro: 
+    - Introduce the team 
+    - Game Plan of project
+    - Executive Summary
+    - Explain the game of tennis
 
-Acquire and prepare slide: 
+Mason - Acuisition & Preparation
+    - steps to acquire
+    - steps to prepare
+    - problems and resolutions
 
-Explore slides (idea of layout): 
-
+Daniel - Exploration 
     - What drives win? 
-
     - Roger Federer. Drivers of greatness. Show him compared to the average player. Driver of greatness could be a stat over a certain threshold. 
-
     - Roger Federer. Compare him against his rivals. Is he really the greatest current player? 
+    - when they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
 
-    - When they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
+Chloe - Modeling
+    - prepare
+    - models
+        - baseline
+        - no_upset model 
+        - best model accuracy (train & validate)
+    - explain how best model works
+    - best model on test data
 
-Model Slide:
-
-Conclusion Slide:
-
-Next Steps Slide:
-
-Links Slide: 
-
+Alejandro - Conclusion 
+    - What did we learn from all this? 
+    - What else can this be applied to? 
 
