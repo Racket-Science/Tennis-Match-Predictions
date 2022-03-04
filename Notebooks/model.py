@@ -74,7 +74,7 @@ def model_prep(train,validate,test):
        'round_R32', 'round_R64', 'round_RR', 'round_SF', 'tourney_level_A', 'tourney_level_D',
        'tourney_level_F', 'tourney_level_G', 'tourney_level_M',
        'Carpet', 'Grass', 'Hard',
-       'ht_diff', 'age_diff', 'rank_points_diff', 'winner_rank', 'loser_rank', 'winner']
+       'ht_diff', 'age_diff', 'rank_points_diff', 'winner_rank', 'loser_rank', 'winner', 'no_upset', 'year']
 
     train = train.drop(columns=drop_cols)
     validate = validate.drop(columns=drop_cols)
