@@ -237,3 +237,14 @@ def random_val(X_train, X_validate, y_train, y_validate):
     mf
 
 
+def get_random_forest_test(X_train, X_validate, X_test, y_train, y_validate, y_test):
+    '''This function: 
+    returns random forest accuracy on train and validate data'''
+
+    # create model object and fit it to training data
+    rf = RandomForestClassifier(max_depth=9, min_samples_leaf=7, random_state=123)
+    rf.fit(X_train, y_train)
+
+    # print result
+    print(f"Accuracy of Random Forest on test is {rf.score(X_test, y_test)}")
+    
