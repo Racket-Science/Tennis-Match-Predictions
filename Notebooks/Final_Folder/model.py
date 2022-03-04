@@ -234,6 +234,7 @@ def random_val(X_train, X_validate, y_train, y_validate):
         
     mf = pd.DataFrame(metrics)
     mf["difference"] = mf.train_accuracy - mf.validate_accuracy
-    mf
+    
+    return mf
 
 
