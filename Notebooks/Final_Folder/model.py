@@ -234,7 +234,8 @@ def random_val(X_train, X_validate, y_train, y_validate):
         
     mf = pd.DataFrame(metrics)
     mf["difference"] = mf.train_accuracy - mf.validate_accuracy
-    mf
+    
+    return mf
 
 
 def get_random_forest_test(X_train, X_validate, X_test, y_train, y_validate, y_test):
