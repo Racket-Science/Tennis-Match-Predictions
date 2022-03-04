@@ -75,7 +75,7 @@ train, validate, test = train_validate_test_split(df)
 # In[10]:
 
 
-# player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_Clay.
+# player1_rankpoints, player1_righthand, player1_lefthand, Clay.
 
 
 # In[8]:
@@ -83,9 +83,9 @@ train, validate, test = train_validate_test_split(df)
 
 def get_ttest_rank_points(train):
     '''This function: 
-    returns rusults of chi-square for player_1_wins and player_1_rank_points'''
+    returns rusults of chi-square for player_1_wins and player1_rankpoints'''
 
-    t, p = stats.ttest_1samp(train.player_1_wins, train.player_1_rank_points.mean())
+    t, p = stats.ttest_1samp(train.player_1_wins, train.player1_rankpoints.mean())
 
     print(f't = {t:.3f}')
     print(f'p = {p:.3f}')
@@ -108,7 +108,7 @@ def get_winning_player_rank_points(train):
     fig, (ax1,ax2) = plt.subplots(1,2)
     
     # assign values and labels for ax1
-    values = [train.player_1_rank_points[(train.player_1_wins == True)].mean(), train.player_1_rank_points[(train.player_1_wins == False)].mean()]
+    values = [train.player1_rankpoints[(train.player_1_wins == True)].mean(), train.player1_rankpoints[(train.player_1_wins == False)].mean()]
     labels = ['Wins','Losses']
 
     # generate and display graph
@@ -116,7 +116,7 @@ def get_winning_player_rank_points(train):
     ax1.title.set_text("Player 1's Mean Rank Points")
    
     # assign values and labels for ax2
-    values = [train.player_2_rank_points[(train.player_1_wins == False)].mean(), train.player_2_rank_points[(train.player_1_wins == True)].mean()]
+    values = [train.player2_rankpoints[(train.player_1_wins == False)].mean(), train.player2_rankpoints[(train.player_1_wins == True)].mean()]
     labels = ['Wins','Losses']
 
     # generate and display graph
@@ -139,9 +139,9 @@ def get_winning_player_rank_points(train):
 
 def get_chi_right_hand(train):
     '''This function: 
-    returns rusults of chi-square for player_1_wins and player_1_rank_points'''
+    returns rusults of chi-square for player_1_wins and player1_rankpoints'''
 
-    observed = pd.crosstab(train.player_1_hand_R, train.player_1_wins)
+    observed = pd.crosstab(train.player1_righthand, train.player_1_wins)
     chi2, p, degf, expected = stats.chi2_contingency(observed)
     p
 
@@ -160,9 +160,9 @@ def get_chi_right_hand(train):
 
 def get_chi_left_hand(train):
     '''This function: 
-    returns rusults of chi-square for player_1_wins and player_1_rank_points'''
+    returns rusults of chi-square for player_1_wins and player1_rankpoints'''
 
-    observed = pd.crosstab(train.player_1_hand_L, train.player_1_wins)
+    observed = pd.crosstab(train.player1_lefthand, train.player_1_wins)
     chi2, p, degf, expected = stats.chi2_contingency(observed)
     p
 
@@ -213,9 +213,9 @@ def get_pie_surface(train):
 
 def get_chi_clay(train):
     '''This function: 
-    returns rusults of chi-square for player_1_wins and player_1_rank_points'''
+    returns rusults of chi-square for player_1_wins and player1_rankpoints'''
 
-    observed = pd.crosstab(train.surface_Clay, train.player_1_wins)
+    observed = pd.crosstab(train.Clay, train.player_1_wins)
     chi2, p, degf, expected = stats.chi2_contingency(observed)
     p
 
