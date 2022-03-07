@@ -12,7 +12,7 @@
 
 Analyze data from 1999 to 2019 to:
 
-1. Create machine-learning algorithm to predict the outcome of a tennis match between two players
+1. Create machine-learning algorithm to predict the outcome of tennis matches between two players on the ATP Tour
  
 2. Learn about what makes Roger Federer one of the top players for the last 20 years by looking at his top rivalries and their match data
 
@@ -121,44 +121,65 @@ Break Point: If a player wins a break point, they win the service game of the op
 ### Steps to Reproduce 
 
         1. Clone this repo.
-        2. That should be all you need to do run the MVP Notebook!
+        2. That should be all you need to do run the Final_report
 
 ### The Plan 
-        - Planning
+        - Plan
             - Create a Trello board
-            - Creare chats on slack and discord for team engagement
+            - Create chats on slack and discord for team engagement
             - Gain domain knowledge
         - Wrangle (Acquire and Prepare)
-            - Create acquire.py and prepare.py with functions for data acquisition and preparation.
-            - Split data for feature exploration and modeling
+            - Acquire csv file data by cloning Jeff Sackmann's repo
+            - Combine csv files
+            - Constrain data to 1999 - 2019 (data that best represents current state of the game)
+            - Rename columns/ features
+            - Drop records that are mostly incomplete (half or more of match stats missing)
+            - Drop records of matches that feature players who are not present enough (lots of missing observations involved)
+            - Fill missing values
+            - Encode categorical features
+            - Randomize target variable (balance data)
+            - Feature engineering
+            - Split data using sklearn library for feature exploration and modeling
+            - Aggregate player career stats
         - Explore
-            - Ask initial questions of the data
-            - Answer questions with visuals and statistics 
+            - Explore drivers of greatness in Roger Federer and his top rivals by looking at above-average career stats (1999 - 2019)
+            - Use statistical tests to determine which features had a relationship with winning
         - Model
-            - For mvp (features: player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_Clay)
+            - Features: 
+                - difference in player rank points
+                - difference in rank
+                - player 1's dominant racquet hand (left or right)
+                - player 1's rank points
+                - court surface (clay --> largest impact)
+                - Head-2-Head stats going into each match
             - Target : outcome (player 1 win/loss)
+            - Baseline: probability of predicting that player 1 wins everytime (51%)
             - 3 best models
-            - On best model provide visuals of how it preformed on the test sample
-
+                - Decision Tree (64% accuracy)
+                - Random Forest (64% accuracy)
+                - Logistic Regression (64% accuracy)
+            - Decision tree model provides visual of how it calculated on the test sample
         - Deliver
             - README.md
-            - *.py
-            - Working report notebook
+            - *.py (helper modules to aid in flow of final report)
+            - Working final report notebook
             - Slides presentation
 
-## Conclusion:
-* Rivals that won half or more meetings with Federer beat him at Grand Slam events
-* The surface of the court affects the outcome of players performance
-* Players performed differently based on the tourney level
-* Higher ranked players win more often (about 64.28% of the time)
-* Baseline beat our best model by 6%
+## Conclusion 
+* Rivals performed differently against Federer based on the tourney level
+* The surface of the court affects the outcome of players performance (especially the clay surface)
+* A difference in rank helps determine the winner
+* A difference in rank points also helps determine the winner
+* Player 1's dominant racquet hand has a relationship with player 1's victory/ loss
+* Higher ranked players win more often (about 64% of the time)
+* Head-2-Head stats improve model performance
+* Our model beat baseline by 13%
 
 ## With more time...
-- Create a model to predict if a player will reach the top 30 ranking by evaluating their first 50 games
-- Filter for players that hit a max rank of 100 or better
 - Aggregate full stats for Aces, Breakpoints, Double Faults, Wins, and First Serve Win by Match
 - Aggregate career performance by court surface (hard, grass, clay, carpet)
-- Aggregate first 50 matches statistics - later use to predict future ranking
+- Aggregate first 50 matches statistics
+- Create a model to predict if a player will reach the top 30 ranking by evaluating performance based on their first 50 matches
 
 #### Questions for our further exploration:
 - Does a difference in career average break points won impact victory?
