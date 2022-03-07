@@ -93,3 +93,121 @@ Alejandro - Conclusion
     - What did we learn from all this? 
     - What else can this be applied to? 
 
+## Script: 
+
+Alejandro - Intro
+
+#########################################################
+
+Mason - Acuisition & Preparation
+
+#########################################################
+
+Daniel - Exploration 
+
+    SLIDE 1:
+        - We first asked, what attributes can correctly predict a match outcome? Using exploration and statistical testing we focused on these key features.  We found that there is no significant difference on either height or age in predicting an outcome and within court surface type of carpet, clay, grass, and hard – only clay showed to be an indicator.
+
+    SLIDE 2:
+        - Beyond, looking at the features to predict a match outcome, we wanted to also explore what are the Drivers of Greatness for a player to succeed in their career.  Aggregating the stats of the 13 players that reached Rank 1, compared to the other 269 other players, we discovered:
+
+        Aces & Breakpoint per match along with First Serve Win % were the primary attributes.
+        While Second Serve Win %, Grass & Hard Surface Performance, and low double fault % served as secondary features
+
+        As we put weight on these features, we concluded that Roger Federer is the greatest tennis player within this time. This discovery was attributed to being in the top 3 of all player attributes.
+
+    SLIDE 3:
+        - We explored Federer’s career over the past two decades and it has been nothing but spectacular, highlighting a 74%-win rate on players ranked 30 or higher and winning a total of 20 grand slams
+
+    SLIDE 4:
+                (viz - 5 seconds or delete it)
+
+    SLIDE 5: 
+        -He has had many rivalries over the years which has produced the finest tennis matches of all time.
+
+        As you can see many players have a higher record then him, including Rafael Nadal who has him beat 9-3 on Clay which is preferable surface for defensive players.
+
+        Still though his performance in the key metrics of greatness, makes him the best player within this twenty-year time span
+
+    SLIDE 6:
+
+        Looking at Federer and his rivals, we asked can greatness be predicted at an early age? Is it natural talent or an evolution through one’s career?
+
+        Aggregating all players first 50 matches, we concluded that it is extremely difficult to predetermine future champions.  We found trends in predicting top 30 players but within Federer and his 4 rivalries only one of which stood out beyond the mean.  Federer, performed within the average in aces and breakpoints, while performing very low in first serve win%, a high loss rate against ranked opponents, and high double fault percentage.
+
+    SLIDE 7:
+
+        In Conclusion:
+
+    - We discovered that height and age play no significant difference in match predictions 
+    - Drivers of Greatness are based on Aces, Breakpoints, & First Serve Win %
+    - Only Clay surface type is significant for prediction – also as expressed in Feder’s Rivals
+    - We believe that greatness comes with experience rather than talent – Age is not a factor
+
+    Next, we have Chloe to talk about our modeling
+
+#########################################################
+
+Chloe - Modeling
+
+    Thanks Daniel. 
+
+    Model Outline
+
+    Our modeling process to predict match winners is as follows: 
+    - We prepared the data for modeling
+    - Created the Baseline to compare our models against
+    - Created a model based on no upsets
+    - Created several classification models evaluating on train and validate before choosing the best one
+    - And finally evaluated on the test dataset
+
+
+    Prepare
+
+    - The first step is to prepare. 
+    - We separated the data into X and Y where the X represents the features that drive player1 to win, and the y represents the target variable that we are trying to predict which is player_1_wins. This reduces the 91 columns in our dataset down to 7. 
+    - We then split the data into train, validate, and test so that our model was not overfit on this dataset and can be evaluated on validate for accuracy. The final model is evaluated on the test data. 
+
+    Baseline
+
+    - Before creating our classification models, we created a baseline to compare them to based on assuming player 2 will win, since player 2 wins most often in this dataset. 
+    - The baseline accuracy is 51%. 
+
+    No Upset Model
+
+    - To improve on the baseline we created a model based on the assumption that there will be no upset, and that the highest ranked player will win the match. 
+    - The accuracy for this model is 64%. 
+
+    Features Model 
+
+    - In creating our classification models, we built several decision tree, random forest and logistic regression models with varying parameters using the features we identified as drivers of win.
+    - The model that preformed the best was the random forest model with  an accuracy of 66% on train and 64% on validate data.
+
+    Random Forest Model 
+
+    - I’ll now explain how our model works. 
+    - A  random forest model is made up of many decision trees. In classification modeling, the objective is to determine which class an observations fits into. To do this, a decision tree chooses the features that effect the target the most, and asks true false questions until a conclusion is reached. 
+    - Many decision trees that use random features and samples make up the random forest model. After each tree has come to its conclusion, the model selects the most common outcome amongst all of the tress as the final decision for the random forest. 
+
+    Feature Importance
+
+    - The features that our Model found to be most important in predicting player 1 winning were: 
+        - player1_rank_diff
+        - player1_rankpoints
+        - Clay
+        - h2h_1
+        - h2h_2
+
+    Evaluate on Test
+
+    - Finally, to test our best model on unseen data, we evaluated the random forest on the test dataset. 
+    - Our model predicts the winner accurately 64% of the time.
+    - This is the same accuracy as our upset model but beats our baseline by 25%. 
+
+    Alejandro will now wrap up the presentation with our conclusion. 
+
+    (2 mins, 30 secs)
+
+#########################################################
+
+Alejandro - Conclusion 
