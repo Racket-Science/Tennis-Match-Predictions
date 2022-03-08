@@ -93,8 +93,8 @@ Mason - Acuisition & Preparation
 
 Daniel - Exploration 
 
-        SLIDE 1:
-        - We first asked, what attributes can correctly predict a match outcome? Using exploration and statistical testing we focused on these key features.  We found that there is no significant difference on either height or age in predicting an outcome and within court surface type of carpet, clay, grass, and hard – only clay showed to be an indicator.
+SLIDE 1:
+ - We first asked, what attributes can correctly predict a match outcome? Using exploration and statistical testing we focused on these key features.  We found that there is no significant difference on either height or age in predicting an outcome and within court surface type of carpet, clay, grass, and hard – only clay showed to be an indicator.
 
     SLIDE 2:
         - Beyond, looking at the features to predict a match outcome, we wanted to also explore what are the Drivers of Greatness for a player to succeed in their career.  Aggregating the stats of the 13 players that reached Rank 1, compared to the other 269 other players, we discovered:
