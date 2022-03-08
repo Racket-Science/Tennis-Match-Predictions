@@ -1,127 +1,35 @@
-
-# Data means nothing unless it tells a story. 
-
-## Instructor Notes: 
-
-Notes from Ryan: 
-- solidify the narrative structure
-    - in the beginning, we hypothesized A and worked on cleaning/etc...
-    - in the middle, we discovered B
-    - in the end, our takeaway is C
-- simplify the executive summary slide
-- recommend end w/ a slide of the team w/ portraits and links
-- Typos and formatting, in need of some proof reading
-- Features for modeling, perhaps they should have more human reading friendly names?
-
-Biggest takeaway from instructor feedback:
-1. Draw the line in the stand for messing with code
-2. Need to create the story from the piles of discovery that we have
-3. Make slides beautiful
-4. Rename features
-
-
-## Structure for our story Filled in
-Goal (opening spiel):
-We are the Racket Science team and our goal is to take data from the last 20 years of professional men's tennis and explore it to identify drivers of win. Using modern machine learning algorithms, we aim to predict the outcome of future matches. We are also delving into the career stats of Roger Federer whom some consider to be the best to ever play the game. We are discovering his drivers of greatness and comparing those drivers to his top rivals to see if he is truly unmatched or if he has been dethroned. We are also exploring the first 50 games of Federer and his rivals to determine if their rise to tennis fame could have been predicted early on. 
-
-- Beginning. In the beginning, we hypothesized A
-In the beginning, only one of use had domain knowledge of professional men’s tennis, but there are certain players that are so famous, even non-tennis heads are aware of them. Roger Federer is that kind of player. We hypothesized that he would be the best player to look at to determine what drives greatness. 
-- and worked on cleaning/etc...
-Before we could get into the project we had to clean and prep the data. We ran into a few issues: 
-    - The dataset was extremely vast so we chose to only work with the last 20 years of ATP (Association of Tennis Professionals) men’s matches starting from 1999 and ending in 2019 since a lot of player’s rankings got messed up during COVID when they couldn’t play matches. 
-    - Each row had a winner and loser instead of a player1 player2 and a column that listed who won. To amend this we randomized winner & loser as player1 and player2 alphabetically and set our target to player_1_wins (True or False) for binary classification.
-    - There was noise in are target column due to walkovers, best of 1 matches,  and players retiring early in the match. We removed these matches from the dataset. 
-    - We also filtered out players that played less than 50 matches. 
-    - We filled missing match time lengths with average match length time for respective tournaments and dropped rows in other columns like height that contained nulls. 
- 	-   There were no aggregated stats, just the stats from each match. We aggregated these stats together to find player averages. 
-	-   The stats from each match can be used for exploration but not modeling, because we can’t model on future knowledge that we won’t have pre-match. For feature selection for modeling we had to narrow the scope to variables we would have access to pre-match like height, age, surface, and rank points, as well as engineer a few more custom features. 
-
- - Middle. in the middle, we discovered B
-
-1. What drives win? 
-Since our ultimate goal is modeling, our exploration starts with looking at the variables we would have access to pre-match like height, age, surface, and rank points, and identify which of these drive winning a match. 
-
-To do this, separate the groups by wins / losses and then see if there is a significant difference between variables in that group. For example: I'll take all of the matches that player1 wins and get the mean rank points for player1 for that group then do the same for all of the matches where player1 loses. If there is a significant difference then height is likely a driver of winning and I can move forward with stats and visuals to confirm this theory. 
-
-Variables we can know pre-match: Height, Age, Rank, Rank Points, Hand, Surface, Rounds, Levels. 
-We discovered that height, age, rounds, and levels weren’t dependent on win. 
-player_1_rank, player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_Clay are all dependent on win. 
-
-2. Roger Federer. Drivers of greatness. Show him compared to the average player. Driver of greatness could be a stat over a certain threshold. 
-
-3. Roger Federer. Compare him against his rivals. Is he really the greatest current player? 
-
-4. When they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
-
-5. Modeling
-
- - End. in the end, our takeaway is C
-
-
-## Slide Ideas and structure: 
-
-Slide Presentastion Break-down: 
-
-
-Alejandro - Intro: 
-    - Introduce the team 
-    - Game Plan of project
-    - Executive Summary
-    - Explain the game of tennis
-
-Mason - Acuisition & Preparation
-    - steps to acquire
-    - steps to prepare
-    - problems and resolutions
-
-Daniel - Exploration 
-    - What drives win? 
-    - Roger Federer. Drivers of greatness. Show him compared to the average player. Driver of greatness could be a stat over a certain threshold. 
-    - Roger Federer. Compare him against his rivals. Is he really the greatest current player? 
-    - when they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
-
-Chloe - Modeling
-    - prepare
-    - models
-        - baseline
-        - no_upset model 
-        - best model accuracy (train & validate)
-    - explain how best model works
-    - best model on test data
-
-Alejandro - Conclusion 
-    - What did we learn from all this? 
-    - What else can this be applied to? 
-
 ## Script: 
 
 Alejandro - Intro
 
-Hello Everyone, My name is Alejandro Velasquez I am a member of team Racket Science. We have used 20 years of pre pandemic Association of Tennis Professionals data to gain insight and intent to predict the outcome a of a tennis match
+Hello Everyone, team Racket Science has used 20 years of pre pandemic Association of Tennis Professionals data to predict the outcome a of a tennis match between two tennis players.
+
 
 --------------
 
-Let me beguine today’s story by introducing you to the hard working team that made this presentation posible. 
-As I mentioned, my names is Alejandro Velasquez,
-We also have Mason sherbondy
-Daniel Norcut
+Before I go on, let me introduce you to the team that made this presentation posible. 
+My names is Alejandro Velasquez,
+Mason Sherbondy
+Daniel Northcutt
 And Chloe Whitaker 
 
 -------------
 
-For today's agenda I will share with you the executive summary of our work, give you all a little introduction to the game of tennis, and walk through our gameplan 
+For today's agenda, I will give you an executive summary, a quick intro to the game of tennis,
+and tell you about our gameplan
 
 After me, Mason will tell you about the work that went in to acquiring and preparing our data
 
-Daniel will tell you about the exploratory work the team did
+Daniel will talk about the exploratory work the team did
 
-And the Chloe will let you know about how we defined our baseline and created our predictive model
+And the Chloe will let you know how we defined our baseline and created our predictive model
 
-At the end, I will meet youfor the conclusions
+At the end, I will discuss our conclusions with you 
+
 
 ----------------
 
-We stabilized 2 main goals:
+Our team stabilized 2 main goals:
 
 Predict the outcome of a match
 And learn about Roger Federer
@@ -129,49 +37,52 @@ And learn about Roger Federer
 To do so we We asked ourselves 
 
 What drives the success of a player
-And ss Roger Federer one of the best of the last 20 years?
+And Is Roger Federer one of the best of the last 20 years?
 
 In our journey we found that 
+
 Top players will win a lot of break points
+
 Will ace their opnets a lot 
-And win their first serve points 
+
+win their first serve points 
+ 
 
 -----------------
 
 For our project we followed the 6 steps of the data science pipeline.
 
-For project planning we used trello 
+We planned using Trello 
 
-To acquire the the data, we used paython and Github
+We acquired our data using python and Github
 
-To prepare our data, we used Jupyter Notebooks, pandas and Numpy 
+To prepare our data we used Jupyter Notebooks, pandas and Numpy 
 
-To learn about our data we leveraged jupyter notebooks with the power of seaborn and matplotlib
+To learn about our data we leveraged jupyter notebooks with seaborn and matplotlib
 
-For modeling we used scikit learn prediction models 
+For modeling we used scikit learn 
 
-And to deliver this beautiful presentation, we used google slides and slidesgo
+And deliver this presentation, we used google slides and slidesgo
 
 ----------------------------
 
-Tennis is played between two players (singles)
+Tennis is played between two players who stand on opposite ends of the court
 
-The two players stand on opposite ends of the court and and one of them will serve the ball and the other will receive.
+ One serves and the other receives
 
-The serving player will stand behind the baseline and attempt to serve the ball from the “deuce” half of the court to the opponent’s deuce side. The ball should hit the service box in the opponent’s court, and the point will play out.
+The serving player will stand behind the baseline and attempt to serve the ball from the “deuce” half of the court to the opponent’s deuce half. 
 
-
-If the serving player fails to hit the service box, it is called a Fault; if a player fails again, it is called a double fault, and the receiving player wins the point.
+The ball should hit the service box in the opponent’s court, for the point to play out.
 
 When a service is returned, the ball most land in the highlighted area for the game to go on. 
 
 If the player who is returning the ball lets the ball bounce two times before returning it, the opposite player wins the point.
 
-A tennis match is made up of Sets. Sets are made up of Games and Games are made up from points. The goal of a tennis match is to win more sets than your opponent in a best of 3 sets or a best of 5 sets
+A tennis match is made up of Sets. Sets are made up of Games and Games are made up from points. The goal of a tennis match is to win more sets than your opponent in a best of 3 sets or a best of 5 sets escenario. 
 
 
+Up next Mason will share with you how we prepared and acquired over 100,000 rows of data 
 
-Up next Mason will share with you how we prepared and acquired ove 100,000 rows of data
 
 
 #########################################################
@@ -288,20 +199,115 @@ Alejandro - Conclusion
 
 Thank you Chloe,
 
-In conclusion we have come to 3 major findings.
+In conclusion
+
 Higher rank players will beat their opponents about 64% of the time. Meaning greatness is thought to beat, even for ML 
 
-
-Roger is way above baseline with a winning record of 82% Players ranked # 1 average a victory rate of 72%
+Roger is has a winning record of 82% 
 
 And greatness comes from experience, in reality age is not a factor 
 
-If we had more time we would love to:
-Aggregate statistics by date to improve modeling
-And take a look to Women's Tour Association to look for parallels in our model
+With more time we would:
+
+Engineering aggregate features-by-date to improve prediction
 
 -------------------
 
-Thank you everyone, I hope our time with you was insightful. If you have any question this will be a good time.
+Thank you for your attention, I hope our time with you was insightful. 
 
+
+
+# Data means nothing unless it tells a story. 
+
+## Instructor Notes: 
+
+Notes from Ryan: 
+- solidify the narrative structure
+    - in the beginning, we hypothesized A and worked on cleaning/etc...
+    - in the middle, we discovered B
+    - in the end, our takeaway is C
+- simplify the executive summary slide
+- recommend end w/ a slide of the team w/ portraits and links
+- Typos and formatting, in need of some proof reading
+- Features for modeling, perhaps they should have more human reading friendly names?
+
+Biggest takeaway from instructor feedback:
+1. Draw the line in the stand for messing with code
+2. Need to create the story from the piles of discovery that we have
+3. Make slides beautiful
+4. Rename features
+
+
+## Structure for our story Filled in
+Goal (opening spiel):
+We are the Racket Science team and our goal is to take data from the last 20 years of professional men's tennis and explore it to identify drivers of win. Using modern machine learning algorithms, we aim to predict the outcome of future matches. We are also delving into the career stats of Roger Federer whom some consider to be the best to ever play the game. We are discovering his drivers of greatness and comparing those drivers to his top rivals to see if he is truly unmatched or if he has been dethroned. We are also exploring the first 50 games of Federer and his rivals to determine if their rise to tennis fame could have been predicted early on. 
+
+- Beginning. In the beginning, we hypothesized A
+In the beginning, only one of use had domain knowledge of professional men’s tennis, but there are certain players that are so famous, even non-tennis heads are aware of them. Roger Federer is that kind of player. We hypothesized that he would be the best player to look at to determine what drives greatness. 
+- and worked on cleaning/etc...
+Before we could get into the project we had to clean and prep the data. We ran into a few issues: 
+    - The dataset was extremely vast so we chose to only work with the last 20 years of ATP (Association of Tennis Professionals) men’s matches starting from 1999 and ending in 2019 since a lot of player’s rankings got messed up during COVID when they couldn’t play matches. 
+    - Each row had a winner and loser instead of a player1 player2 and a column that listed who won. To amend this we randomized winner & loser as player1 and player2 alphabetically and set our target to player_1_wins (True or False) for binary classification.
+    - There was noise in are target column due to walkovers, best of 1 matches,  and players retiring early in the match. We removed these matches from the dataset. 
+    - We also filtered out players that played less than 50 matches. 
+    - We filled missing match time lengths with average match length time for respective tournaments and dropped rows in other columns like height that contained nulls. 
+ 	-   There were no aggregated stats, just the stats from each match. We aggregated these stats together to find player averages. 
+	-   The stats from each match can be used for exploration but not modeling, because we can’t model on future knowledge that we won’t have pre-match. For feature selection for modeling we had to narrow the scope to variables we would have access to pre-match like height, age, surface, and rank points, as well as engineer a few more custom features. 
+
+ - Middle. in the middle, we discovered B
+
+1. What drives win? 
+Since our ultimate goal is modeling, our exploration starts with looking at the variables we would have access to pre-match like height, age, surface, and rank points, and identify which of these drive winning a match. 
+
+To do this, separate the groups by wins / losses and then see if there is a significant difference between variables in that group. For example: I'll take all of the matches that player1 wins and get the mean rank points for player1 for that group then do the same for all of the matches where player1 loses. If there is a significant difference then height is likely a driver of winning and I can move forward with stats and visuals to confirm this theory. 
+
+Variables we can know pre-match: Height, Age, Rank, Rank Points, Hand, Surface, Rounds, Levels. 
+We discovered that height, age, rounds, and levels weren’t dependent on win. 
+player_1_rank, player_1_rank_points, player_1_hand_R, player_1_hand_L, surface_Clay are all dependent on win. 
+
+2. Roger Federer. Drivers of greatness. Show him compared to the average player. Driver of greatness could be a stat over a certain threshold. 
+
+3. Roger Federer. Compare him against his rivals. Is he really the greatest current player? 
+
+4. When they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
+
+5. Modeling
+
+ - End. in the end, our takeaway is C
+
+
+## Slide Ideas and structure: 
+
+Slide Presentastion Break-down: 
+
+
+Alejandro - Intro: 
+    - Introduce the team 
+    - Game Plan of project
+    - Executive Summary
+    - Explain the game of tennis
+
+Mason - Acuisition & Preparation
+    - steps to acquire
+    - steps to prepare
+    - problems and resolutions
+
+Daniel - Exploration 
+    - What drives win? 
+    - Roger Federer. Drivers of greatness. Show him compared to the average player. Driver of greatness could be a stat over a certain threshold. 
+    - Roger Federer. Compare him against his rivals. Is he really the greatest current player? 
+    - when they were young. Can greatness of the greatest be predicted? Look at Federer and his rivals when they were young and see if they had those drivers of greatness then. 
+
+Chloe - Modeling
+    - prepare
+    - models
+        - baseline
+        - no_upset model 
+        - best model accuracy (train & validate)
+    - explain how best model works
+    - best model on test data
+
+Alejandro - Conclusion 
+    - What did we learn from all this? 
+    - What else can this be applied to? 
 
