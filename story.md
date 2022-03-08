@@ -117,39 +117,47 @@ Daniel will tell you about the exploratory work the team did
 
 And the Chloe will let you know about how we defined our baseline and created our predictive model
 
-At the end, I will meet you again to talk about the conclusions and the next steps that await this project 
+At the end, I will meet youfor the conclusions
 
 ----------------
 
-Using 20 years of pre pandemic data we stabilized 2 main goals:
+We stabilized 2 main goals:
+
 Predict the outcome of a match
 And learn about Roger Federer
 
 To do so we We asked ourselves 
+
 What drives the success of a player
-Is Roger Federer really one of the best of the last 20 years?
+And ss Roger Federer one of the best of the last 20 years?
 
 In our journey we found that 
 Top players will win a lot of break points
 Will ace their opnets a lot 
-win their first serve points 
-
-And some surfaces will give players an statistical advantage
+And win their first serve points 
 
 -----------------
 
-For our project we decided to follow this 6 steps of the data science pipeline.
+For our project we followed the 6 steps of the data science pipeline.
+
 For project planning we used trello 
+
 To acquire the the data, we used paython and Github
+
 To prepare our data, we used Jupyter Notebooks, pandas and Numpy 
-To explore and learn about our data we leveraged jupyter notebooks with the power of seaborn and matplotlib
+
+To learn about our data we leveraged jupyter notebooks with the power of seaborn and matplotlib
+
 For modeling we used scikit learn prediction models 
-And to create an deliver this beautiful presentation, we used google slides and a the design of slidesgo
+
+And to deliver this beautiful presentation, we used google slides and slidesgo
 
 ----------------------------
 
 Tennis is played between two players (singles)
-The two players stand on opposite ends of the court and and one of them will serve the ball and the other will receive. 
+
+The two players stand on opposite ends of the court and and one of them will serve the ball and the other will receive.
+
 The serving player will stand behind the baseline and attempt to serve the ball from the “deuce” half of the court to the opponent’s deuce side. The ball should hit the service box in the opponent’s court, and the point will play out.
 
 
