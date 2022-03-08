@@ -165,8 +165,7 @@ Chloe - Modeling
     Prepare
 
     - The first step is to prepare. 
-    - We separated the data into X and Y where the X represents the features that drive player1 to win, and the y represents the target variable that we are trying to predict which is player_1_wins. This reduces the 91 columns in our dataset down to 7. 
-    - We then split the data into train, validate, and test so that our model was not overfit on this dataset and can be evaluated on validate for accuracy. The final model is evaluated on the test data. 
+    - We separated the data into X and Y where the X represents the features that drive player1 to win, and the y represents the target variable that we are trying to predict which is player_1_wins. This reduces the 91 columns in our dataset down to 7.
 
     Baseline
 
@@ -175,13 +174,14 @@ Chloe - Modeling
 
     No Upset Model
 
-    - To improve on the baseline we created a model based on the assumption that there will be no upset, and that the highest ranked player will win the match. 
+    - To improve on the baseline we created a model based on the assumption that there will be no upsets, and that the highest ranked player will win the match. 
+    - This might seem like a simple model, however it will actually be tough to beat since it is based off a player’s rank they got through winning tournaments and racking up rank points. The best indication we have that a player will win in the future is that they’ve done so consistently in the past. 
     - The accuracy for this model is 64%. 
 
     Features Model 
 
-    - In creating our classification models, we built several decision tree, random forest and logistic regression models with varying parameters using the features we identified as drivers of win.
-    - The model that preformed the best was the random forest model with  an accuracy of 66% on train and 64% on validate data.
+    - To try to improve on this model, we built several decision tree, random forest and logistic regression models with varying parameters using the features we identified as drivers of win.
+    - The model that preformed the best was the random forest model with an accuracy of 66% on train and 64% on validate.
 
     Random Forest Model 
 
