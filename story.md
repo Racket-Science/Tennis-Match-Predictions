@@ -148,7 +148,7 @@ And to create an deliver this beautiful presentation, we used google slides and 
 
 ----------------------------
 
-Tennis is played between two players (singles) and four players (doubles). Today we will be talking specifically about males’ singles.
+Tennis is played between two players (singles)
 The two players stand on opposite ends of the court and and one of them will serve the ball and the other will receive. 
 The serving player will stand behind the baseline and attempt to serve the ball from the “deuce” half of the court to the opponent’s deuce side. The ball should hit the service box in the opponent’s court, and the point will play out.
 
@@ -159,7 +159,7 @@ When a service is returned, the ball most land in the highlighted area for the g
 
 If the player who is returning the ball lets the ball bounce two times before returning it, the opposite player wins the point.
 
-A tennis match is made up of Sets. Sets are made up of Games and Games are made up from points. The goal of a tennis match is to win more sets than your opponent in a best of 3 sets or a best of 5
+A tennis match is made up of Sets. Sets are made up of Games and Games are made up from points. The goal of a tennis match is to win more sets than your opponent in a best of 3 sets or a best of 5 sets
 
 
 
@@ -282,7 +282,10 @@ Thank you Chloe,
 
 In conclusion we have come to 3 major findings.
 Higher rank players will beat their opponents about 64% of the time. Meaning greatness is thought to beat, even for ML 
-Roger is way above baseline with a winning record of 82%
+
+
+Roger is way above baseline with a winning record of 82% Players ranked # 1 average a victory rate of 72%
+
 And greatness comes from experience, in reality age is not a factor 
 
 If we had more time we would love to:
