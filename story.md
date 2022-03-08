@@ -105,7 +105,7 @@ Mason - Acuisition & Preparation
 
 Daniel - Exploration 
 
-    SLIDE 1:
+        SLIDE 1:
         - We first asked, what attributes can correctly predict a match outcome? Using exploration and statistical testing we focused on these key features.  We found that there is no significant difference on either height or age in predicting an outcome and within court surface type of carpet, clay, grass, and hard – only clay showed to be an indicator.
 
     SLIDE 2:
@@ -114,21 +114,18 @@ Daniel - Exploration
         Aces & Breakpoint per match along with First Serve Win % were the primary attributes.
         While Second Serve Win %, Grass & Hard Surface Performance, and low double fault % served as secondary features
 
+    SLIDE 3: 
         As we put weight on these features, we concluded that Roger Federer is the greatest tennis player within this time. This discovery was attributed to being in the top 3 of all player attributes.
 
-    SLIDE 3:
-        - We explored Federer’s career over the past two decades and it has been nothing but spectacular, highlighting a 74%-win rate on players ranked 30 or higher and winning a total of 20 grand slams
-
     SLIDE 4:
-                (viz - 5 seconds or delete it)
-
+        - We explored Federer’s career over the past two decades and it has been nothing but spectacular, highlighting a 74%-win rate on players ranked 30 or higher and winning a total of 20 grand slams
+    
     SLIDE 5: 
         -He has had many rivalries over the years which has produced the finest tennis matches of all time.
 
         As you can see many players have a higher record then him, including Rafael Nadal who has him beat 9-3 on Clay which is preferable surface for defensive players.
 
         Still though his performance in the key metrics of greatness, makes him the best player within this twenty-year time span
-
     SLIDE 6:
 
         Looking at Federer and his rivals, we asked can greatness be predicted at an early age? Is it natural talent or an evolution through one’s career?
