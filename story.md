@@ -98,13 +98,17 @@ Alejandro - Conclusion
 Alejandro - Intro
 
 Hello Everyone, My name is Alejandro Velasquez I am a member of team Racket Science. We have used 20 years of pre pandemic Association of Tennis Professionals data to gain insight and intent to predict the outcome a of a tennis match
-*
+
+--------------
+
 Let me beguine today’s story by introducing you to the hard working team that made this presentation posible. 
 As I mentioned, my names is Alejandro Velasquez,
 We also have Mason sherbondy
 Daniel Norcut
 And Chloe Whitaker 
-*
+
+-------------
+
 For today's agenda I will share with you the executive summary of our work, give you all a little introduction to the game of tennis, and walk through our gameplan 
 
 After me, Mason will tell you about the work that went in to acquiring and preparing our data
@@ -112,7 +116,9 @@ Daniel will tell you about the exploratory work the team did
 And the Chloe will let you know about how we defined our baseline and created our predictive model
 
 At the end, I will meet you again to talk about the conclusions and the next steps that await this project 
-*
+
+----------------
+
 Using 20 years of pre pandemic data we stabilized 2 main goals:
 Predict the outcome of a match
 And learn about Roger Federer
@@ -127,19 +133,19 @@ Will ace their opnets a lot
 win their first serve points 
 
 And some surfaces will give players an statistical advantage
-*
+
+-----------------
+
 For our project we decided to follow this 6 steps of the data science pipeline.
-For our project planning we used trello 
-To acquire the the data used paythion and Github
-To prepare our data we used Jupyter Notebooks, pandas and Numpy 
+For project planning we used trello 
+To acquire the the data, we used paython and Github
+To prepare our data, we used Jupyter Notebooks, pandas and Numpy 
 To explore and learn about our data we leveraged jupyter notebooks with the power of seaborn and matplotlib
 For modeling we used scikit learn prediction models 
 And to create an deliver this beautiful presentation, we used google slides and a the design of slidesgo	
 
+
 Up next Mason will share with you how we prepared and acquired ove 100,000 rows of data
-
-
- 
 
 
 #########################################################
@@ -264,7 +270,8 @@ And greatness comes from experience, in reality age is not a factor
 If we had more time we would love to:
 Aggregate statistics by date to improve modeling
 And take a look to Women's Tour Association to look for parallels in our model
-*
+
+-------------------
 
 Thank you everyone, I hope our time with you was insightful. If you have any question this will be a good time.
 
