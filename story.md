@@ -2,12 +2,11 @@
 
 Alejandro - Intro
 
-Hello Everyone, team Racket Science has used 20 years of pre pandemic Association of Tennis Professionals data to predict the outcome a of a tennis match between two tennis players.
-
+Like most of the world, Team Racket Science loves sports, both watching and predicting the outcome. As data scientists we believe that we can leverage machine learning techniques to help predict the victor. We have used 20 years of pre pandemic Association of Tennis Professionals data to predict the outcome of a tennis match between two tennis players.
 
 --------------
 
-Before I go on, let me introduce you to the team that made this presentation posible. 
+Now let me introduce you to team Racket Science
 My names is Alejandro Velasquez,
 Mason Sherbondy
 Daniel Northcutt
@@ -31,11 +30,11 @@ At the end, I will discuss our conclusions with you
 
 Our team stabilized 2 main goals:
 
-Predict the outcome of a match
-And learn about Roger Federer
+Predict the outcome of a match and 
+discover what makes a player great. 
+To accomplish our second goal, we focused on Roger Federer,one of the modern greats of tennis.
 
 To do so we We asked ourselves 
-
 What drives the success of a player
 And Is Roger Federer one of the best of the last 20 years?
 
@@ -45,7 +44,7 @@ Top players will win a lot of break points
 
 Will ace their opnets a lot 
 
-win their first serve points 
+and win their first serve points 
  
 
 -----------------
@@ -62,7 +61,7 @@ To learn about our data we leveraged jupyter notebooks with seaborn and matplotl
 
 For modeling we used scikit learn 
 
-And deliver this presentation, we used google slides and slidesgo
+And deliver this presentation using google slides and slidesgo
 
 ----------------------------
 
@@ -81,8 +80,7 @@ If the player who is returning the ball lets the ball bounce two times before re
 A tennis match is made up of Sets. Sets are made up of Games and Games are made up from points. The goal of a tennis match is to win more sets than your opponent in a best of 3 sets or a best of 5 sets escenario. 
 
 
-Up next Mason will share with you how we prepared and acquired over 100,000 rows of data 
-
+Up next Mason will share with you how we acquired and prepared over 100,000 rows of data 
 
 
 #########################################################
@@ -92,11 +90,8 @@ Mason - Acuisition & Preparation
 Thank you Alejandro.
 
 #Acquire Slide
--I am Mason Sherbondy, and today I will go over how we 'wrangled' the data. 
 
-- We acquired our data simply by cloning Jeff Sackmann's repository for the men's tennis tour on Github.
-
--Github is a code hosting platform for version control and collaboration with over 73 million developers involved.
+- To wrangle the data, we simply cloned Jeff Sackmann's repository for the men's tennis tour on Github.
 
 - After we cloned the repository, we were ready to prepare the data in our Jupyter Notebooks
 
