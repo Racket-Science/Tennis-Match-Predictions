@@ -89,6 +89,39 @@ Up next Mason will share with you how we prepared and acquired over 100,000 rows
 
 Mason - Acuisition & Preparation
 
+Thank you Alejandro.
+
+#Acquire Slide
+-I am Mason Sherbondy, and today I will go over how we 'wrangled' the data. 
+
+- We acquired our data simply by cloning Jeff Sackmann's repository for the men's tennis tour on Github.
+
+-Github is a code hosting platform for version control and collaboration with over 73 million developers involved.
+
+- After we cloned the repository, we were ready to prepare the data in our Jupyter Notebooks
+
+#Prepare Slide
+
+-First, we combined all of our .csv files in one dataframe.
+
+- The data was largely in the format we needed, which is all of the match statistics as well as biographical information for both players, except the players were designated as winner and loser
+
+-Since our goal was to develop a model to predict the winner of tennis matches, we renamed the winner and loser columns as player 1 and player 2, and we balanced the dataset by randomizing the order of winners so that player 1 and player 2 had a similar chance of being the winner. We then created a boolean mask that declared whether or not player 1 won the match. This was our target variable
+
+- Because the pandemic has curbed top player participation, and because we wanted our data to represent the heart of men's tennis, we limited our data to the years 1999 - 2019, and we dropped all records that involved players who played less than 50 matches. Our data now represented the heart of the game.
+
+-To clean the data, we renamed more columns, filled missing values and encoded categorical features for modeling
+
+- Now that our data was clean at this point, the biggest problem we faced in preparing the data was most of our features were post-match accounts. We cannot base a pre-match prediction for a matchup based on features that are generated during the match. 
+
+-So, since we were really looking for drivers of winning, we decided to navigate our major feature problem through feature engineering, and we decided to explore drivers of greatness as well.
+
+- We set our feature focus on aggregated statistics. A feature created for the problem was head 2 head stats, which is a rolling aggregate record of wins for each player matchup.
+
+-And in order to explore drivers of greatness, a player dataset was created based on aggregated career stats for any players in our data who achieved a rank of 100 or higher, and we focused on Roger Federer and his top rivals.
+
+- This sums up our wrangling process. I will now hand you over to Daniel, who will go over our findings in this project.
+
 #########################################################
 
 Daniel - Exploration 
