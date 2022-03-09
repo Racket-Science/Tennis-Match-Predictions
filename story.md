@@ -91,7 +91,7 @@ Thank you Alejandro.
 
 #Acquire Slide
 
-- To wrangle the data, we simply cloned Jeff Sackmann's repository for the men's tennis tour on Github.
+- To wrangle the data, we simply cloned Jeff Sackmann's repository for the men's tennis tour on Github, a code hosting platform for version control and collaboration.
 
 - After we cloned the repository, we were ready to prepare the data in our Jupyter Notebooks
 
@@ -105,15 +105,15 @@ Thank you Alejandro.
 
 - Because the pandemic has curbed top player participation, and because we wanted our data to represent the heart of men's tennis, we limited our data to the years 1999 - 2019, and we dropped all records that involved players who played less than 50 matches. Our data now represented the heart of the game.
 
--To clean the data, we renamed more columns, filled missing values and encoded categorical features for modeling
+-To clean the data, we renamed columns, filled missing values and encoded categorical features for modeling
 
-- Now that our data was clean at this point, the biggest problem we faced in preparing the data was most of our features were post-match accounts. We cannot base a pre-match prediction for a matchup based on features that are generated during the match. 
+- Now that our data was clean, the biggest problem we faced in preparing the data was most of our features were post-match accounts. We cannot base a pre-match prediction for a matchup based on features that are generated during the match. 
 
 -So, since we were really looking for drivers of winning, we decided to navigate our major feature problem through feature engineering, and we decided to explore drivers of greatness as well.
 
-- We set our feature focus on aggregated statistics. A feature created for the problem was head 2 head stats, which is a rolling aggregate record of wins for each player matchup.
+- We set our feature focus on aggregated statistics. A feature we created for the problem was head 2 head stats, which is a rolling aggregate record of wins for each player matchup.
 
--And in order to explore drivers of greatness, a player dataset was created based on aggregated career stats for any players in our data who achieved a rank of 100 or higher, and we focused on Roger Federer and his top rivals.
+-And in order to explore drivers of greatness, we created a player dataset based on aggregated career stats for any players in our data who achieved a rank of 100 or higher, and we focused on Roger Federer and his top rivals.
 
 - This sums up our wrangling process. I will now hand you over to Daniel, who will go over our findings in this project.
 
