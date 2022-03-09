@@ -91,7 +91,7 @@ Thank you Alejandro.
 
 #Acquire Slide
 
-- To wrangle the data, we simply cloned Jeff Sackmann's repository for the men's tennis tour on Github, a code hosting platform for version control and collaboration.
+- To begin our wrangle, we simply cloned Jeff Sackmann's repository for the men's tennis tour on Github, a code hosting platform for version control and collaboration.
 
 - After we cloned the repository, we were ready to prepare the data in our Jupyter Notebooks
 
