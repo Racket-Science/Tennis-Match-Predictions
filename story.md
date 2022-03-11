@@ -1,6 +1,6 @@
 ## Script: 
 
-Alejandro - Intro
+Intro
 
 Like most of the world, Team Racket Science loves sports, both watching and predicting the outcome. As data scientists we believe that we can leverage machine learning techniques to help predict the victor. We have used 20 years of pre pandemic Association of Tennis Professionals data to predict the outcome of a tennis match between two tennis players.
 
